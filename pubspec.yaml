@@ -18,6 +18,8 @@ dependencies:
   dio:
   get_it: ^8.0.3
   injectable: ^2.5.0
+  toast:
+  fluttertoast:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,10 +51,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: asset/fonts/Inter-Regular.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
