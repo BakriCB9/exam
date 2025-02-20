@@ -1,16 +1,23 @@
+<<<<<<< HEAD
 import 'package:exam_app/features/register/data/data_source/api_manger.dart';
 import 'package:exam_app/features/register/data/repo/user_repo_impl.dart';
 import 'package:exam_app/features/register/domain/repo/user_repo.dart';
 import 'package:exam_app/features/register/domain/usecase/register_user.dart';
 import 'package:exam_app/features/register/presentation/cubit/register_cubit.dart';
 import 'package:exam_app/features/register/presentation/pages/signup_page.dart';
+=======
+import 'package:exam_app/core/di/di.dart';
+import 'package:exam_app/features/auth/presentation/screens/login_screen.dart';
+>>>>>>> 838109d4923a4b57d94aa22960ecefaa242bce8a
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  configureDependencies();
+  runApp(const ExampApp());
 }
 
+<<<<<<< HEAD
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -28,6 +35,16 @@ class MyApp extends StatelessWidget {
           child: SignUpPage(),
         ),
       ),
+=======
+class ExampApp extends StatelessWidget {
+  const ExampApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(),
+>>>>>>> 838109d4923a4b57d94aa22960ecefaa242bce8a
     );
   }
 }
