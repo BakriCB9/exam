@@ -1,12 +1,13 @@
 import 'package:exam_app/core/di/di.dart';
 import 'package:exam_app/core/widgets/custom_text_form_field.dart';
-import 'package:exam_app/features/auth/data/model/loginModel.dart';
-import 'package:exam_app/features/auth/presentation/cubit/cubit/login_cubit.dart';
-import 'package:exam_app/features/auth/presentation/cubit/cubit/login_state.dart';
+import 'package:exam_app/core/widgets/ui_utils.dart';
+import 'package:exam_app/features/login/data/model/loginModel.dart';
+import 'package:exam_app/features/login/presentation/cubit/cubit/login_cubit.dart';
+import 'package:exam_app/features/login/presentation/cubit/cubit/login_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:toast/toast.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,20 +31,21 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
         child: BlocListener<LoginCubit, LoginState>(
           bloc: loginCubit,
           listener: (context, state) {
             switch (state) {
               case LoginStateLoading():
-                print('Loddddddddddddddddddddddddddddddddiiinggggg');
-              case LoginStateSuccess():
-                //Toast.show(state.message);
-                print('yes we do it now ');
-              case LoginStateError():
-                // Toast.show(state.message);
+                UiUtils.showLoading(context);
 
-                print('faillllllllllllllllllllllllllllllll');
+              case LoginStateSuccess():
+                UiUtils.hideLoading(context);
+
+              case LoginStateError():
+                UiUtils.hideLoading(context);
+                UiUtils.showToastMessage(state.message);
+
               case LoginStateInit():
               // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>));
             }

@@ -1,7 +1,8 @@
 import 'package:exam_app/core/api_manager/api_manager.dart';
-import 'package:exam_app/features/auth/data/datasource/remote/remote_datasource_impl.dart';
-import 'package:exam_app/features/auth/data/model/loginModel.dart';
-import 'package:exam_app/features/auth/data/model/login_response/login_response.dart';
+import 'package:exam_app/features/login/data/datasource/remote/remote_datasource_impl.dart';
+import 'package:exam_app/features/login/data/model/loginModel.dart';
+import 'package:exam_app/features/login/data/model/login_response/login_response.dart';
+
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: RemoteDataSourceContract)
