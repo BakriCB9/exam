@@ -1,3 +1,6 @@
+import 'package:exam_app/config/appColor.dart';
+import 'package:exam_app/config/appFontsize.dart';
+import 'package:exam_app/config/appString.dart';
 import 'package:exam_app/core/di/di.dart';
 import 'package:exam_app/core/widgets/custom_text_form_field.dart';
 import 'package:exam_app/core/widgets/ui_utils.dart';
@@ -28,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -59,13 +63,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         CustomTextFormField(
-                            label: 'Email',
-                            hintText: 'Enter the email',
+                            validate: (value) {
+                              if (value?.length == 0 || value == null) {
+                                return 'enter the email please';
+                              }
+                              return null;
+                            },
+                            label: AppString.email,
+                            hintText: AppString.enterTheEmail,
                             controllerText: loginCubit.emailController),
                         const SizedBox(height: 24),
                         CustomTextFormField(
-                            label: 'Password',
-                            hintText: 'Enter the password',
+                            validate: (value) {},
+                            label: AppString.password,
+                            hintText: AppString.enterThePassword,
                             controllerText: loginCubit.passwordController),
                       ],
                     )),
@@ -76,16 +87,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         children: [
                           Checkbox(value: false, onChanged: (_) {}),
-                          const Text('Remember me')
+                          Text(
+                            AppString.remember,
+                            style: theme.bodySmall
+                                ?.copyWith(fontSize: AppFontSize.fontSize13),
+                          )
                         ],
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                         child: Align(
                             alignment: Alignment.centerRight,
                             child: Text(
-                              'Forget Password?',
-                              style: TextStyle(
+                              AppString.forgetPasword,
+                              style: theme.bodySmall?.copyWith(
                                   decoration: TextDecoration.underline),
                             )))
                   ],
@@ -104,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           password: loginCubit.passwordController.text));
                     },
                     child: Text(
-                      'Login',
+                      AppString.login,
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -117,14 +132,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 RichText(
                   text: TextSpan(children: [
                     TextSpan(
-                        text: 'Don\'t have an account?  ',
-                        style:
-                            TextStyle(fontSize: 16, color: Color(0xFF0F0F0F))),
+                        text: AppString.dontHaveAccount,
+                        style: theme.bodyMedium),
                     TextSpan(
-                        text: 'Sign up',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Color(0xFF02369C),
+                        text: AppString.signUp,
+                        style: theme.bodyMedium?.copyWith(
+                            color: AppColor.blueBase,
                             decoration: TextDecoration.underline),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
