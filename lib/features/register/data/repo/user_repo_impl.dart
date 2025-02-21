@@ -3,8 +3,9 @@ import 'package:exam_app/features/register/data/data_source/api_manger.dart';
 import 'package:exam_app/features/register/data/models/user_model.dart';
 import 'package:exam_app/features/register/domain/entite/user_entite.dart';
 import 'package:exam_app/features/register/domain/repo/user_repo.dart';
+import 'package:injectable/injectable.dart';
 
-
+@Injectable(as:UserRepo)
 class UserRepoImpl implements UserRepo {
   final ApiManger api;
 
