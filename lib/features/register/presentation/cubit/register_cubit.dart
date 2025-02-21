@@ -1,9 +1,9 @@
 import 'package:exam_app/features/register/domain/entite/user_entite.dart';
 import 'package:exam_app/features/register/domain/usecase/register_user.dart';
 import 'package:exam_app/features/register/presentation/cubit/cubit_state.dart';
+import 'package:exam_app/features/register/presentation/method/extrac_error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 class RegistrationCubit extends Cubit<RegistrationState> {
   final RegisterUser registerUser;
 
@@ -14,8 +14,6 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController rePasswordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-
-  // Track errors for each field
   String? usernameError;
   String? firstNameError;
   String? lastNameError;
@@ -40,22 +38,6 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       password: passwordController.text,
       rePassword: rePasswordController.text,
     );
-String extractErrorMessage(String error) {
-  RegExp regExp = RegExp(r'message:\s*([^,}]+)'); 
-  
-  final match = regExp.firstMatch(error);
-  
-  if (match != null && match.group(1) != null) {
-    return match.group(1)!.trim(); 
-  }
-  
-  return "failed registrtion"; 
-}
-
-
-
-
-
 try {
   await registerUser(user);
   emit(RegistrationSuccess("Registration successful"));
