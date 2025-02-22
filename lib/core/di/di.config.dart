@@ -11,7 +11,7 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../features/login/data/datasource/remote/remote_api_dataSource_impl.dart'
+import '../../features/login/data/datasource/remote_dataSource/remote_api_dataSource_impl.dart'
     as _i976;
 import '../../features/login/data/repo/auth_repo_imp.dart' as _i436;
 import '../../features/login/domain/usecase/loginUseCase.dart' as _i813;

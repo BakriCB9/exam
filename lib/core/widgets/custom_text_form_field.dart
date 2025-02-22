@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 
+typedef EventFunction = String? Function(String?);
+
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
-      {super.key,
-      required this.label,
-      required this.hintText,
-      required this.controllerText});
+  const CustomTextFormField({
+    super.key,
+    required this.label,
+    required this.hintText,
+    required this.controllerText,
+    required this.validate,
+  });
   final String label;
   final String hintText;
   final TextEditingController controllerText;
-
+  final EventFunction validate;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validate,
       controller: controllerText,
       decoration: InputDecoration(
         contentPadding:
