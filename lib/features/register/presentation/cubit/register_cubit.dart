@@ -4,6 +4,9 @@ import 'package:exam_app/features/register/presentation/cubit/cubit_state.dart';
 import 'package:exam_app/features/register/presentation/method/extrac_error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+
+@injectable
 class RegistrationCubit extends Cubit<RegistrationState> {
   final RegisterUser registerUser;
 

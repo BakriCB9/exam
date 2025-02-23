@@ -1,7 +1,8 @@
 
 import 'package:exam_app/features/register/domain/entite/user_entite.dart';
 import 'package:exam_app/features/register/domain/repo/user_repo.dart';
-
+import 'package:injectable/injectable.dart';
+@injectable
 class RegisterUser {
   final UserRepo repo;
 

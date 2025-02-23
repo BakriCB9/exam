@@ -5,6 +5,8 @@ import 'package:exam_app/features/register/presentation/widgets/sign_field.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/di/di.dart';
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -24,7 +26,7 @@ class _MyWidgetState extends State<SignUpPage> {
             } else if (state is RegistrationFailure) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
             }
-           
+
           },
           builder: (context, state) {
              final cubit = context.read<RegistrationCubit>();
@@ -51,9 +53,9 @@ class _MyWidgetState extends State<SignUpPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: SignField(
-        
+
                           errorText: cubit.usernameError,
-        
+
                         controller: cubit.usernameController,
                           hint: "Enter your user name", label: "User name"),
                     ),
@@ -64,7 +66,7 @@ class _MyWidgetState extends State<SignUpPage> {
                           padding: const EdgeInsets.only(right: 10),
                           child: SignField(
                               errorText: cubit.firstNameError,
-        
+
                             controller: cubit.firstNameController,
                               hint: "Enter first name", label: "first name"),
                         )),
@@ -114,14 +116,14 @@ class _MyWidgetState extends State<SignUpPage> {
                         controller: cubit.phoneController,
                           hint: "Enter phone number", label: "phone number"),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
-                   isLoading 
-                  ? CircularProgressIndicator() 
+                   isLoading
+                  ? const CircularProgressIndicator()
                   : InkWell(
                       onTap: () => cubit.register(),
-                      child: SignButton(),
+                      child: const SignButton(),
                     ),
                     const Padding(
                       padding: EdgeInsets.all(16),
@@ -138,10 +140,10 @@ class _MyWidgetState extends State<SignUpPage> {
                           Text(
                             "Login",
                             style: TextStyle(
-                                decorationColor: Color(0XFFb02369C),
+                                decorationColor: Color(0Xffb02369c),
                                 decorationThickness: 2,
                                 decoration: TextDecoration.underline,
-                                color: Color(0XFFb02369C),
+                                color: Color(0Xffb02369c),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16),
                           ),

@@ -43,7 +43,7 @@ class SignField extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15,top: 5.0),
             child: Text(
               errorText!,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.red,
                 fontSize: 10,
               ),
