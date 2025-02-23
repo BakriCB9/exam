@@ -16,25 +16,17 @@ class CustomTextFormField extends StatelessWidget {
   final EventFunction validate;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
     return TextFormField(
       validator: validate,
       controller: controllerText,
       decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        label: Text(label),
-        labelStyle: const TextStyle(color: Color(0xFFA6A6A6), fontSize: 15),
-        hintText: hintText,
-        hintStyle: const TextStyle(
-            fontSize: 14,
-            color: Color(0xFFA6A6A6),
-            fontWeight: FontWeight.normal),
-        border: const OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xFF535353))),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xFF535353))),
-        // errorBorder: OutlineInputBorder()
-      ),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          label: Text(label),
+          labelStyle: theme.labelMedium,
+          hintText: hintText,
+          hintStyle: theme.labelSmall),
     );
   }
 }

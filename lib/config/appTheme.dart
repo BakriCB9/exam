@@ -9,8 +9,6 @@ class AppTheme {
             color: AppColor.placeHolder, fontSize: AppFontSize.fontSize16),
         enabledBorder:
             OutlineInputBorder(borderSide: BorderSide(color: AppColor.grey)),
-        // border: OutlineInputBorder(
-        //     borderSide: BorderSide(color: AppColor.lightRed)),
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.redError)),
         focusedBorder:
@@ -22,9 +20,9 @@ class AppTheme {
       ),
       textTheme: TextTheme(
           labelMedium: TextStyle(
-              color: AppColor.placeHolder, fontSize: AppFontSize.fontSize14),
+              color: AppColor.placeHolder, fontSize: AppFontSize.fontSize16),
           labelSmall: TextStyle(
-              color: AppColor.grey,
+              color: AppColor.placeHolder,
               fontSize: AppFontSize.fontSize14,
               fontWeight: FontWeight.normal),
           bodyMedium: TextStyle(

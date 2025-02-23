@@ -1,12 +1,13 @@
 import 'package:exam_app/config/appColor.dart';
-import 'package:exam_app/config/appFontsize.dart';
 import 'package:exam_app/config/appString.dart';
 import 'package:exam_app/core/di/di.dart';
+import 'package:exam_app/core/validate/validate.dart';
 import 'package:exam_app/core/widgets/custom_text_form_field.dart';
 import 'package:exam_app/core/widgets/ui_utils.dart';
 import 'package:exam_app/features/login/data/model/loginModel.dart';
 import 'package:exam_app/features/login/presentation/cubit/cubit/login_cubit.dart';
 import 'package:exam_app/features/login/presentation/cubit/cubit/login_state.dart';
+import 'package:exam_app/features/login/presentation/screens/widget/custom_checkBox.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,18 +64,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         CustomTextFormField(
-                            validate: (value) {
-                              if (value?.length == 0 || value == null) {
-                                return 'enter the email please';
-                              }
-                              return null;
-                            },
+                            validate: (value) => checkValidatEmail(value),
                             label: AppString.email,
                             hintText: AppString.enterTheEmail,
                             controllerText: loginCubit.emailController),
                         const SizedBox(height: 24),
                         CustomTextFormField(
-                            validate: (value) {},
+                            validate: (value) => checkValidatePassword(value),
                             label: AppString.password,
                             hintText: AppString.enterThePassword,
                             controllerText: loginCubit.passwordController),
@@ -83,18 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Checkbox(value: false, onChanged: (_) {}),
-                          Text(
-                            AppString.remember,
-                            style: theme.bodySmall
-                                ?.copyWith(fontSize: AppFontSize.fontSize13),
-                          )
-                        ],
-                      ),
-                    ),
+                    const Expanded(child: CustomCheckBox()),
                     Expanded(
                         child: Align(
                             alignment: Alignment.centerRight,
@@ -120,15 +105,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: Text(
                       AppString.login,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: theme.bodyMedium?.copyWith(color: AppColor.white),
                     ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF02369C)),
                   ),
                 ),
-                SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 RichText(
                   text: TextSpan(children: [
                     TextSpan(
@@ -152,4 +133,21 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+String? checkValidatEmail(value) {
+  if (Validator.isEmail(value)) {
+    return null;
+  }
+  return 'Your Email isn\'t correct';
+}
+
+String? checkValidatePassword(value) {
+  if (!Validator.hasMinLength(value, minLength: 8)) {
+    return 'Your password must at least 8 character';
+  }
+  if (!Validator.isPassword(value)) {
+    return "Your password in Correct";
+  }
+  return null;
 }
