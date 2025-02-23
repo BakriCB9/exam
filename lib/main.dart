@@ -1,3 +1,4 @@
+import 'package:exam_app/config/appTheme.dart';
 import 'package:exam_app/core/di/di.dart';
 import 'package:exam_app/features/login/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,10 @@ class ExampApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return const MaterialApp(
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: LoginScreen(),
+          home: const LoginScreen(),
+          theme: AppTheme.lightTheme,
         );
       },
       // child:

@@ -1,5 +1,6 @@
 import 'package:exam_app/features/login/data/model/loginModel.dart';
+import 'package:exam_app/features/login/data/model/login_response/login_response.dart';
 
 abstract class RemoteDataSourceContract {
-  Future<String> login(LoginRequestModel requestBody);
+  Future<LoginResponse> login(LoginRequestModel requestBody);
 }

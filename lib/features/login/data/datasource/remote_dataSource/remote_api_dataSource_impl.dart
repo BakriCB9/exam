@@ -10,9 +10,9 @@ class RemoteApiDataSoucrceImpl implements RemoteDataSourceContract {
   ApiManager apiManager;
   RemoteApiDataSoucrceImpl(this.apiManager);
   @override
-  Future<String> login(LoginRequestModel requestBody) async {
+  Future<LoginResponse> login(LoginRequestModel requestBody) async {
     var body = await apiManager.login(requestbody: requestBody);
 
-    return LoginResponse.fromJson(body.data).message ?? " ";
+    return LoginResponse.fromJson(body.data);
   }
 }

@@ -18,8 +18,8 @@ dependencies:
   dio:
   get_it: ^8.0.3
   injectable: ^2.5.0
-  toast:
   fluttertoast:
+  flutter_secure_storage: ^9.2.4
 
 dev_dependencies:
   flutter_test:

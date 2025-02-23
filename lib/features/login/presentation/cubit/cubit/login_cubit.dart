@@ -1,5 +1,6 @@
 import 'package:exam_app/core/api_manager/api_result.dart';
 import 'package:exam_app/features/login/data/model/loginModel.dart';
+import 'package:exam_app/features/login/data/model/login_response/login_response.dart';
 import 'package:exam_app/features/login/domain/usecase/loginUseCase.dart';
 import 'package:exam_app/features/login/presentation/cubit/cubit/login_state.dart';
 
@@ -16,11 +17,11 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController passwordController = TextEditingController();
   Future<void> login(LoginRequestModel requestBody) async {
     emit(LoginStateLoading());
-    ApiResult<String> result = await loginusecase(requestBody);
+    ApiResult<LoginResponse> result = await loginusecase(requestBody);
     switch (result) {
-      case ApiResultSuccess<String>():
-        emit(LoginStateSuccess(result.data));
-      case ApiResultError<String>():
+      case ApiResultSuccess<LoginResponse>():
+        emit(LoginStateSuccess(result.data.message!));
+      case ApiResultError<LoginResponse>():
         emit(LoginStateError(result.error));
     }
   }
