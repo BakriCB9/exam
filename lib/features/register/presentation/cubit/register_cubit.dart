@@ -1,3 +1,4 @@
+import 'package:exam_app/core/di/api_manger/api_result.dart';
 import 'package:exam_app/features/register/domain/entite/user_entite.dart';
 import 'package:exam_app/features/register/domain/usecase/register_user.dart';
 import 'package:exam_app/features/register/presentation/cubit/cubit_state.dart';
@@ -28,6 +29,8 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   RegistrationCubit(this.registerUser) : super(RegistrationInitial());
 
   Future<void> register() async {
+
+    emit(RegistrationLoading());
     if (!validateForm()) {
       return; 
     }
@@ -41,17 +44,22 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       password: passwordController.text,
       rePassword: rePasswordController.text,
     );
-try {
-  await registerUser(user);
-  emit(RegistrationSuccess("Registration successful"));
-} catch (e) {
-  String errorMessage = e.toString();
-  
-  String extractedMessage = extractErrorMessage(errorMessage);
 
-  emit(RegistrationFailure("Registration failed: $extractedMessage"));
+       var apiResult = await registerUser.call(user);
+
+       switch(apiResult)
+    {
+
+
+         case SucessApiResult():
+
+           emit(RegistrationSuccess("Registration successful"));
+         case ErrorApiResul():
+
+           emit(RegistrationFailure(ErrorApiResul(apiResult.exception).toString()));
+       }
 }
-}
+
 
   bool validateForm() {
     bool isValid = true;

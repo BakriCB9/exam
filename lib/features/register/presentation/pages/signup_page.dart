@@ -15,11 +15,17 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<SignUpPage> {
+  late RegistrationCubit registrationCubit;
+  void initState() {
+    super.initState();
+    registrationCubit = getIt.get<RegistrationCubit>();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: BlocConsumer<RegistrationCubit, RegistrationState>(
+          bloc: registrationCubit,
           listener: (context, state) {
              if (state is RegistrationSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
@@ -29,7 +35,7 @@ class _MyWidgetState extends State<SignUpPage> {
 
           },
           builder: (context, state) {
-             final cubit = context.read<RegistrationCubit>();
+             final cubit = registrationCubit;
              bool isLoading = state is RegistrationLoading;
             return SafeArea(
                 child: Padding(
