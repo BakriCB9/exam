@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:exam_app/core/api_manager/api_result.dart';
+import 'package:exam_app/features/login/core/api_manager/api_request.dart';
+import 'package:exam_app/features/login/core/api_manager/api_result.dart';
 import 'package:exam_app/features/login/data/datasource/local_dataSource/local_dataSource_contract.dart';
 import 'package:exam_app/features/login/data/datasource/remote_dataSource/remote_datasource_impl.dart';
 import 'package:exam_app/features/login/data/model/loginModel.dart';
@@ -13,7 +14,8 @@ class LoginRepoImpl implements LoginRepo {
   final RemoteDataSourceContract remoteDataSourceContract;
   LoginRepoImpl(this.remoteDataSourceContract, this.localDataSourceContract);
   @override
-  Future<ApiResult<LoginResponse>> login(LoginRequestModel requestBody) async {
+  Future<ApiResult<LoginResponse>> login(
+      ApiRequestModel<LoginRequestModel> requestBody) async {
     try {
       var ans = await remoteDataSourceContract.login(requestBody);
       if (ans.token != null) {

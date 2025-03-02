@@ -1,9 +1,10 @@
 import 'package:exam_app/config/appColor.dart';
 import 'package:exam_app/config/appString.dart';
-import 'package:exam_app/core/di/di.dart';
-import 'package:exam_app/core/validate/validate.dart';
-import 'package:exam_app/core/widgets/custom_text_form_field.dart';
-import 'package:exam_app/core/widgets/ui_utils.dart';
+import 'package:exam_app/features/login/core/api_manager/api_request.dart';
+import 'package:exam_app/features/login/core/di/di.dart';
+import 'package:exam_app/features/login/core/validate/validate.dart';
+import 'package:exam_app/features/login/core/widgets/custom_text_form_field.dart';
+import 'package:exam_app/features/login/core/widgets/ui_utils.dart';
 import 'package:exam_app/features/login/data/model/loginModel.dart';
 import 'package:exam_app/features/login/presentation/cubit/cubit/login_cubit.dart';
 import 'package:exam_app/features/login/presentation/cubit/cubit/login_state.dart';
@@ -43,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
             switch (state) {
               case LoginStateLoading():
                 UiUtils.showLoading(context);
+              // ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
               case LoginStateSuccess():
                 UiUtils.hideLoading(context);
@@ -99,9 +101,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (!formkey.currentState!.validate()) {
                         return;
                       }
-                      loginCubit.login(LoginRequestModel(
-                          email: loginCubit.emailController.text,
-                          password: loginCubit.passwordController.text));
+                      loginCubit.login(ApiRequestModel<LoginRequestModel>(
+                          LoginRequestModel(
+                              email: loginCubit.emailController.text,
+                              password: loginCubit.passwordController.text)));
                     },
                     child: Text(
                       AppString.login,
