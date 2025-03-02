@@ -5,11 +5,12 @@ import 'package:exam_app/features/register/presentation/widgets/sign_field.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/di/di.dart';
+import '../../core/di/di.dart';
+
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
-
+  static const String signUp = 'SignUpPage';
   @override
   State<SignUpPage> createState() => _MyWidgetState();
 }
@@ -30,6 +31,7 @@ class _MyWidgetState extends State<SignUpPage> {
              if (state is RegistrationSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
             } else if (state is RegistrationFailure) {
+
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
             }
 
@@ -41,6 +43,8 @@ class _MyWidgetState extends State<SignUpPage> {
                 child: Padding(
               padding: const EdgeInsets.all(15),
               child: Form(
+                key: cubit.formKey,
+
                 child: Column(
                   children: [
                     const Row(

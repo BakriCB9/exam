@@ -1,16 +1,16 @@
-import 'package:exam_app/core/di/api_manger/api_result.dart';
-import 'package:exam_app/features/register/domain/entite/user_entite.dart';
-import 'package:exam_app/features/register/domain/usecase/register_user.dart';
-import 'package:exam_app/features/register/presentation/cubit/cubit_state.dart';
 import 'package:exam_app/features/register/presentation/method/extrac_error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../domain/entite/user_entite.dart';
+import '../../domain/usecase/register_user.dart';
+import 'cubit_state.dart';
+
 @injectable
 class RegistrationCubit extends Cubit<RegistrationState> {
   final RegisterUser registerUser;
-
+  final formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
@@ -29,10 +29,8 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   RegistrationCubit(this.registerUser) : super(RegistrationInitial());
 
   Future<void> register() async {
-
-    emit(RegistrationLoading());
     if (!validateForm()) {
-      return; 
+      return;
     }
 
     final user = UserEntite(
@@ -44,22 +42,19 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       password: passwordController.text,
       rePassword: rePasswordController.text,
     );
+    try {
+      await registerUser(user);
+      emit(RegistrationSuccess("Registration successful"));
+    } catch (e) {
+      String errorMessage = e.toString();
 
-       var apiResult = await registerUser.call(user);
+      String extractedMessage = extractErrorMessage(errorMessage);
+      print("------------------------------------------------");
+      print(errorMessage);
 
-       switch(apiResult)
-    {
-
-
-         case SucessApiResult():
-
-           emit(RegistrationSuccess("Registration successful"));
-         case ErrorApiResul():
-
-           emit(RegistrationFailure(ErrorApiResul(apiResult.exception).toString()));
-       }
-}
-
+      emit(RegistrationFailure("Registration failed: $extractedMessage"));
+    }
+  }
 
   bool validateForm() {
     bool isValid = true;

@@ -20,19 +20,21 @@ class SignField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+
           controller: controller,
           decoration: InputDecoration(
+            errorStyle: TextStyle(color: Colors.red),
             labelText: label,
             hintText: hint,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: errorText != null ? Colors.red : Colors.grey,  
+                color: errorText != null ? Colors.red : Colors.grey,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: errorText != null ? Colors.red : Colors.blue,  
+                color: errorText != null ? Colors.red : Colors.blue,
               ),
             ),
           ),

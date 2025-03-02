@@ -1,4 +1,5 @@
-sealed class RegistrationState {
+
+sealed class RegistrationState  {
   const RegistrationState();
 }
 
@@ -13,7 +14,7 @@ class RegistrationSuccess extends RegistrationState {
 }
 
 class RegistrationFailure extends RegistrationState {
-  final String error;
+   String  error;
 
   RegistrationFailure(this.error);
 }
