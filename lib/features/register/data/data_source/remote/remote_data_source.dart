@@ -1,30 +1,28 @@
 import 'package:dio/dio.dart';
-import 'package:exam_app/core/api_manager/api_manager.dart';
-import 'package:exam_app/features/register/data/data_source/data_source.dart';
-import 'package:exam_app/features/register/data/models/user_model.dart';
 import 'package:injectable/injectable.dart';
 
-
+import '../../../../../core/api_manager/api_manager.dart';
+import '../../../../../core/api_manager/api_result.dart';
+import '../../models/user_model.dart';
+import '../data_source.dart';
 
 @Injectable(as: DataSource)
-class RegisterDataSource extends DataSource
-{
-
-  ApiManager apiManager;
+class RegisterDataSource extends DataSource {
+  final ApiManager apiManager;
 
   RegisterDataSource(this.apiManager);
-    @override
 
-  Future<Map<String,dynamic>> register(UserModel user) async {
+  @override
+  Future<ApiResult<Map<String, dynamic>>> register(UserModel user) async {
     try {
-      final response = await apiManager.post( data:user.toJson(),endpoint:"/api/v1/auth/signup");
-      return response.data;
+      final response = await apiManager.post(
+        data: user.toJson(),
+        endpoint: "/api/v1/auth/signup",
+      );
+      return SuccessApiResult(response.data);
     } on DioException catch (e) {
-
-      throw Exception('Registration failed: ${e.response?.data ?? e.message}');
+      print("Registration failed: ${e.response?.data["message"] ?? e.message}");
+      return ErrorApiResult(Exception(' ${e.response?.data["message"]}'));
     }
   }
-
-
-  
 }

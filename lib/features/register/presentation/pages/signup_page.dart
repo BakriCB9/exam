@@ -28,17 +28,14 @@ class _MyWidgetState extends State<SignUpPage> {
         child: BlocConsumer<RegistrationCubit, RegistrationState>(
           bloc: registrationCubit,
           listener: (context, state) {
-             if (state is RegistrationSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-            } else if (state is RegistrationFailure) {
-
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+            if (state.status == Status.success) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.successMessage ?? "Success")));
+            } else if (state.status == Status.error) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error ?? "An error occurred")));
             }
-
           },
           builder: (context, state) {
              final cubit = registrationCubit;
-             bool isLoading = state is RegistrationLoading;
             return SafeArea(
                 child: Padding(
               padding: const EdgeInsets.all(15),
@@ -129,7 +126,7 @@ class _MyWidgetState extends State<SignUpPage> {
                     const SizedBox(
                       height: 30,
                     ),
-                   isLoading
+                   state.loading
                   ? const CircularProgressIndicator()
                   : InkWell(
                       onTap: () => cubit.register(),

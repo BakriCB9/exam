@@ -4,6 +4,8 @@ import 'package:exam_app/features/register/domain/entite/user_entite.dart';
 import 'package:exam_app/features/register/domain/repo/user_repo.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/api_manager/api_result.dart';
+
 
 @Injectable(as: UserRepo)
 class UserRepoImpl implements UserRepo {
@@ -12,8 +14,8 @@ class UserRepoImpl implements UserRepo {
   UserRepoImpl(this.registerDataSource);
 
   @override
-  Future< Map<String, dynamic>> register(UserEntite user) async {
-    try {
+  Future< ApiResult<Map<String,dynamic>>> register(UserEntite user) async {
+
       return await registerDataSource.register(UserModel(
         username: user.username,
         firstName: user.firstName,
@@ -23,9 +25,5 @@ class UserRepoImpl implements UserRepo {
         password: user.password,
         rePassword: user.rePassword,
       ));
-    } catch (e) {
-      print('Error during registration: $e');
-      return {'error': 'Registration failed'};
     }
   }
-}

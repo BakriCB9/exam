@@ -1,3 +1,4 @@
+import 'package:exam_app/core/api_manager/api_result.dart';
 import 'package:exam_app/features/register/presentation/method/extrac_error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   String? rePasswordError;
   String? phoneError;
 
-  RegistrationCubit(this.registerUser) : super(RegistrationInitial());
+  RegistrationCubit(this.registerUser) : super(RegistrationState(status:Status.loading,loading: false));
 
   Future<void> register() async {
     if (!validateForm()) {
@@ -42,18 +43,21 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       password: passwordController.text,
       rePassword: rePasswordController.text,
     );
-    try {
-      await registerUser(user);
-      emit(RegistrationSuccess("Registration successful"));
-    } catch (e) {
-      String errorMessage = e.toString();
 
-      String extractedMessage = extractErrorMessage(errorMessage);
-      print("------------------------------------------------");
-      print(errorMessage);
 
-      emit(RegistrationFailure("Registration failed: $extractedMessage"));
-    }
+      emit(state.copyWith(status: Status.loading, loading: true));
+
+      final result = await registerUser(user);
+
+      if (result is SuccessApiResult) {
+        emit(state.copyWith(status: Status.success, successMessage: "Registration successful", loading: false));
+      } else if (result is ErrorApiResult) {
+
+        final errorMessage = (result as ErrorApiResult).exception.toString().replaceFirst('Exception: ', '');
+
+        emit(state.copyWith(status: Status.error, error:errorMessage, loading: false));
+      }
+
   }
 
   bool validateForm() {
@@ -100,7 +104,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       isValid = false;
     }
 
-    emit(RegistrationInitial());
+
     return isValid;
   }
 
@@ -113,4 +117,5 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     rePasswordController.dispose();
     phoneController.dispose();
   }
+
 }
