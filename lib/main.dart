@@ -3,7 +3,8 @@
 import 'package:exam_app/features/register/presentation/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 
-import 'features/register/core/di/di.dart';
+import 'core/di/di.dart';
+
 
 void main() {
    configureDependencies();

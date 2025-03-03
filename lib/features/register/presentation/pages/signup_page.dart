@@ -5,7 +5,7 @@ import 'package:exam_app/features/register/presentation/widgets/sign_field.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/di/di.dart';
+import '../../../../core/di/di.dart';
 
 
 class SignUpPage extends StatefulWidget {
