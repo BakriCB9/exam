@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:exam_app/features/login/core/api_manager/api_request.dart';
-import 'package:exam_app/features/login/core/api_manager/api_result.dart';
+import 'package:exam_app/core/api_manager/api_request.dart';
+import 'package:exam_app/core/api_manager/api_result.dart';
+
 import 'package:exam_app/features/login/data/datasource/local_dataSource/local_dataSource_contract.dart';
 import 'package:exam_app/features/login/data/datasource/remote_dataSource/remote_datasource_impl.dart';
 import 'package:exam_app/features/login/data/model/loginModel.dart';

@@ -1,5 +1,5 @@
 import 'package:exam_app/config/appTheme.dart';
-import 'package:exam_app/features/login/core/di/di.dart';
+import 'package:exam_app/core/di/di.dart';
 import 'package:exam_app/features/login/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

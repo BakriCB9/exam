@@ -1,6 +1,4 @@
-sealed class ApiRequest <T>{
-
-}
+sealed class ApiRequest<T> {}
 
 class ApiRequestModel<T> extends ApiRequest<T> {
   T data;
