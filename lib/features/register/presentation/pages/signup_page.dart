@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/di.dart';
+import '../cubit/register_intent.dart';
 
 
 class SignUpPage extends StatefulWidget {
@@ -129,7 +130,7 @@ class _MyWidgetState extends State<SignUpPage> {
                    state.loading
                   ? const CircularProgressIndicator()
                   : InkWell(
-                      onTap: () => cubit.register(),
+                      onTap: () => cubit.DoIntent(RegisterButtonClicked()),
                       child: const SignButton(),
                     ),
                     const Padding(

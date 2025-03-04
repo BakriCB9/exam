@@ -1,5 +1,5 @@
 import 'package:exam_app/core/api_manager/api_result.dart';
-import 'package:exam_app/features/register/presentation/method/extrac_error_message.dart';
+import 'package:exam_app/features/register/presentation/cubit/register_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -28,9 +28,8 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   String? phoneError;
 
   RegistrationCubit(this.registerUser) : super(RegistrationState(status:Status.loading,loading: false));
-
-  Future<void> register() async {
-    if (!validateForm()) {
+  Future<void> _register() async {
+    if (!_validateForm()) {
       return;
     }
 
@@ -49,18 +48,21 @@ class RegistrationCubit extends Cubit<RegistrationState> {
 
       final result = await registerUser(user);
 
-      if (result is SuccessApiResult) {
-        emit(state.copyWith(status: Status.success, successMessage: "Registration successful", loading: false));
-      } else if (result is ErrorApiResult) {
+      switch(result)
+    {
+        case SuccessApiResult():{
+          emit(state.copyWith(status: Status.success, successMessage: "Registration successful", loading: false));
 
-        final errorMessage = (result as ErrorApiResult).exception.toString().replaceFirst('Exception: ', '');
+        }
+        case ErrorApiResult():{
+          emit(state.copyWith(status: Status.error, error:result.exception.toString().replaceFirst('Exception: ', ''), loading: false));
 
-        emit(state.copyWith(status: Status.error, error:errorMessage, loading: false));
-      }
+        }
+       }
 
   }
 
-  bool validateForm() {
+  bool _validateForm() {
     bool isValid = true;
 
     usernameError = null;
@@ -107,6 +109,25 @@ class RegistrationCubit extends Cubit<RegistrationState> {
 
     return isValid;
   }
+
+
+DoIntent (RegisterIntent registerIntent)
+{
+  switch (registerIntent) {
+    case RegisterButtonClicked():
+      {
+    _register();
+
+      }
+
+    case NavigateToLoginPageClicked():
+      {
+
+
+      }
+  }
+}
+
 
   void disposeControllers() {
     usernameController.dispose();
