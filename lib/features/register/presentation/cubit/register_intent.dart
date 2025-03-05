@@ -1,9 +1,5 @@
-sealed class RegisterIntent{}
+sealed class RegisterIntent {}
 
-class RegisterButtonClicked extends RegisterIntent{
+class RegisterButtonClicked extends RegisterIntent {}
 
-}
-
-class NavigateToLoginPageClicked extends RegisterIntent{
-
-}
+class NavigateToLoginPageClicked extends RegisterIntent {}

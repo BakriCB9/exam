@@ -27,7 +27,8 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   String? rePasswordError;
   String? phoneError;
 
-  RegistrationCubit(this.registerUser) : super(RegistrationState(status:Status.loading,loading: false));
+  RegistrationCubit(this.registerUser)
+      : super(RegistrationState(status: Status.loading, loading: false));
   Future<void> _register() async {
     if (!_validateForm()) {
       return;
@@ -43,23 +44,27 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       rePassword: rePasswordController.text,
     );
 
+    emit(state.copyWith(status: Status.loading, loading: true));
 
-      emit(state.copyWith(status: Status.loading, loading: true));
+    final result = await registerUser(user);
 
-      final result = await registerUser(user);
-
-      switch(result)
-    {
-        case SuccessApiResult():{
-          emit(state.copyWith(status: Status.success, successMessage: "Registration successful", loading: false));
-
+    switch (result) {
+      case SuccessApiResult():
+        {
+          emit(state.copyWith(
+              status: Status.success,
+              successMessage: "Registration successful",
+              loading: false));
         }
-        case ErrorApiResult():{
-          emit(state.copyWith(status: Status.error, error:result.exception.toString().replaceFirst('Exception: ', ''), loading: false));
-
+      case ErrorApiResult():
+        {
+          emit(state.copyWith(
+              status: Status.error,
+              error:
+                  result.exception.toString().replaceFirst('Exception: ', ''),
+              loading: false));
         }
-       }
-
+    }
   }
 
   bool _validateForm() {
@@ -85,7 +90,9 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       lastNameError = "Last Name cannot be empty";
       isValid = false;
     }
-    if (emailController.text.isEmpty || !RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$").hasMatch(emailController.text)) {
+    if (emailController.text.isEmpty ||
+        !RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
+            .hasMatch(emailController.text)) {
       emailError = "Enter a valid email address";
       isValid = false;
     }
@@ -101,33 +108,25 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       phoneError = "Phone number cannot be empty";
       isValid = false;
     }
-    if (rePasswordController.text.isEmpty ) {
+    if (rePasswordController.text.isEmpty) {
       rePasswordError = "confirm password not valid";
       isValid = false;
     }
 
-
     return isValid;
   }
 
+  DoIntent(RegisterIntent registerIntent) {
+    switch (registerIntent) {
+      case RegisterButtonClicked():
+        {
+          _register();
+        }
 
-DoIntent (RegisterIntent registerIntent)
-{
-  switch (registerIntent) {
-    case RegisterButtonClicked():
-      {
-    _register();
-
-      }
-
-    case NavigateToLoginPageClicked():
-      {
-
-
-      }
+      case NavigateToLoginPageClicked():
+        {}
+    }
   }
-}
-
 
   void disposeControllers() {
     usernameController.dispose();
@@ -138,5 +137,4 @@ DoIntent (RegisterIntent registerIntent)
     rePasswordController.dispose();
     phoneController.dispose();
   }
-
 }
