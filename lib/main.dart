@@ -28,5 +28,5 @@ class MyApp extends StatelessWidget {
 onGenerateRoute: RouteGenerator.getRoute,
        initialRoute: Routes.registerRoute,
 
-      home: const SignUpPage(),
+      home: child,
      ));}}

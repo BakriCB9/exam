@@ -40,7 +40,7 @@ class _MyWidgetState extends State<SignUpPage> {
              final cubit = registrationCubit;
             return SafeArea(
                 child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding:  EdgeInsets.all(15.r),
               child: Form(
                 key: cubit.formKey,
 
@@ -60,7 +60,7 @@ class _MyWidgetState extends State<SignUpPage> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding:  EdgeInsets.symmetric(vertical: 20.h),
                       child: SignField(
 
                           errorText: cubit.usernameError,
@@ -72,7 +72,7 @@ class _MyWidgetState extends State<SignUpPage> {
                       children: [
                         Expanded(
                             child: Padding(
-                          padding: const EdgeInsets.only(right: 10),
+                          padding:  EdgeInsets.only(right: 10.w),
                           child: SignField(
                               errorText: cubit.firstNameError,
 
@@ -81,7 +81,7 @@ class _MyWidgetState extends State<SignUpPage> {
                         )),
                         Expanded(
                             child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
+                          padding:  EdgeInsets.only(left: 10.w),
                           child: SignField(
                              errorText: cubit.lastNameError,
                             controller: cubit.lastNameController,
@@ -90,7 +90,7 @@ class _MyWidgetState extends State<SignUpPage> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding:  EdgeInsets.symmetric(vertical: 20.h),
                       child:
                           SignField(
                             errorText: cubit.emailError,
@@ -101,7 +101,7 @@ class _MyWidgetState extends State<SignUpPage> {
                       children: [
                         Expanded(
                             child: Padding(
-                          padding: const EdgeInsets.only(right: 10),
+                          padding:  EdgeInsets.only(right: 10.w),
                           child: SignField(
                           errorText: cubit.passwordError,
                             controller: cubit.passwordController,
@@ -109,7 +109,7 @@ class _MyWidgetState extends State<SignUpPage> {
                         )),
                         Expanded(
                             child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
+                          padding:  EdgeInsets.only(left: 10.w),
                           child: SignField(
                             errorText: cubit.rePasswordError,
                             controller: cubit.rePasswordController,
@@ -119,7 +119,7 @@ class _MyWidgetState extends State<SignUpPage> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding:  EdgeInsets.symmetric(vertical: 20.h),
                       child: SignField(
                       errorText: cubit.phoneError,
                         controller: cubit.phoneController,
@@ -135,7 +135,7 @@ class _MyWidgetState extends State<SignUpPage> {
                       child: const SignButton(),
                     ),
                      Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.all(16.r),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
