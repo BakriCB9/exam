@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/di/di.dart';
+import '../../../../core/routes_manager/routes_name.dart';
 import '../cubit/register_intent.dart';
 
 
@@ -146,15 +147,18 @@ class _MyWidgetState extends State<SignUpPage> {
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16.sp),
                           ),
-                          Text(
-                            "Login",
-                            style: TextStyle(
-                                decorationColor: Color(0Xffb02369c),
-                                decorationThickness: 2,
-                                decoration: TextDecoration.underline,
-                                color: Color(0Xffb02369c),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16.sp),
+                          InkWell(
+                            onTap: ()=>  Navigator.of(context).pushReplacementNamed(Routes.loginRoute),
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                  decorationColor: Color(0Xffb02369c),
+                                  decorationThickness: 2,
+                                  decoration: TextDecoration.underline,
+                                  color: Color(0Xffb02369c),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16.sp),
+                            ),
                           ),
                         ],
                       ),
