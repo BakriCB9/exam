@@ -1,5 +1,7 @@
 
 
+import 'package:exam_app/core/routes_manager/route_generator.dart';
+import 'package:exam_app/core/routes_manager/routes_name.dart';
 import 'package:exam_app/features/register/presentation/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,13 +23,10 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
 
 
-     child:   MaterialApp(
+     builder: (context,child)=>MaterialApp(
       debugShowCheckedModeBanner: false,
-onGenerateRoute: ,
-      initialRoute: SignUpPage.signUp,
+onGenerateRoute: RouteGenerator.getRoute,
+       initialRoute: Routes.registerRoute,
 
-      routes: {
-        SignUpPage.signUp: (context) => const SignUpPage(),
-      },
       home: const SignUpPage(),
      ));}}
