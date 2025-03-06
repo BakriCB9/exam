@@ -11,29 +11,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  retrofit: ^4.4.0
-  logger: ^2.4.0
-  json_annotation: ^4.9.0
+
   cupertino_icons: ^1.0.8
   flutter_bloc:
-
-  dio: ^5.8.0+1
-
-  toast:
-  fluttertoast:
-  injectable: ^2.5.0
+  flutter_screenutil:
+  dio:
   get_it: ^8.0.3
+  injectable: ^2.5.0
+  fluttertoast:
+  flutter_secure_storage: ^9.2.4
   equatable: ^2.0.7
-  flutter_lints: ^5.0.0
-  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
-  retrofit_generator: '>=8.0.0 <10.0.0'
-  json_serializable: ^6.8.0
-  injectable_generator:
-  build_runner:
   flutter_test:
     sdk: flutter
+
+  injectable_generator:
+  build_runner:
+
+  flutter_lints: ^4.0.0
 
 flutter:
   # The following line ensures that the Material Icons font is
