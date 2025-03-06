@@ -1,12 +1,17 @@
-import 'package:exam_app/features/register/domain/entite/user_entite.dart';
-import 'package:exam_app/features/register/domain/usecase/register_user.dart';
-import 'package:exam_app/features/register/presentation/cubit/cubit_state.dart';
-import 'package:exam_app/features/register/presentation/method/extrac_error_message.dart';
+import 'package:exam_app/core/api_manager/api_result.dart';
+import 'package:exam_app/features/register/presentation/cubit/register_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../domain/entite/user_entite.dart';
+import '../../domain/usecase/register_user.dart';
+import 'cubit_state.dart';
+
+@injectable
 class RegistrationCubit extends Cubit<RegistrationState> {
   final RegisterUser registerUser;
-
+  final formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
@@ -22,11 +27,11 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   String? rePasswordError;
   String? phoneError;
 
-  RegistrationCubit(this.registerUser) : super(RegistrationInitial());
-
-  Future<void> register() async {
-    if (!validateForm()) {
-      return; 
+  RegistrationCubit(this.registerUser)
+      : super(RegistrationState(status: Status.loading, loading: false));
+  Future<void> _register() async {
+    if (!_validateForm()) {
+      return;
     }
 
     final user = UserEntite(
@@ -38,19 +43,31 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       password: passwordController.text,
       rePassword: rePasswordController.text,
     );
-try {
-  await registerUser(user);
-  emit(RegistrationSuccess("Registration successful"));
-} catch (e) {
-  String errorMessage = e.toString();
-  
-  String extractedMessage = extractErrorMessage(errorMessage);
 
-  emit(RegistrationFailure("Registration failed: $extractedMessage"));
-}
-}
+    emit(state.copyWith(status: Status.loading, loading: true));
 
-  bool validateForm() {
+    final result = await registerUser(user);
+
+    switch (result) {
+      case SuccessApiResult():
+        {
+          emit(state.copyWith(
+              status: Status.success,
+              successMessage: "Registration successful",
+              loading: false));
+        }
+      case ErrorApiResult():
+        {
+          emit(state.copyWith(
+              status: Status.error,
+              error:
+                  result.exception.toString().replaceFirst('Exception: ', ''),
+              loading: false));
+        }
+    }
+  }
+
+  bool _validateForm() {
     bool isValid = true;
 
     usernameError = null;
@@ -73,7 +90,9 @@ try {
       lastNameError = "Last Name cannot be empty";
       isValid = false;
     }
-    if (emailController.text.isEmpty || !RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$").hasMatch(emailController.text)) {
+    if (emailController.text.isEmpty ||
+        !RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
+            .hasMatch(emailController.text)) {
       emailError = "Enter a valid email address";
       isValid = false;
     }
@@ -89,13 +108,24 @@ try {
       phoneError = "Phone number cannot be empty";
       isValid = false;
     }
-    if (rePasswordController.text.isEmpty ) {
+    if (rePasswordController.text.isEmpty) {
       rePasswordError = "confirm password not valid";
       isValid = false;
     }
 
-    emit(RegistrationInitial());
     return isValid;
+  }
+
+  DoIntent(RegisterIntent registerIntent) {
+    switch (registerIntent) {
+      case RegisterButtonClicked():
+        {
+          _register();
+        }
+
+      case NavigateToLoginPageClicked():
+        {}
+    }
   }
 
   void disposeControllers() {

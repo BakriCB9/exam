@@ -1,19 +1,31 @@
-abstract class RegistrationState {
-  const RegistrationState();
-}
+import 'package:equatable/equatable.dart';
 
-class RegistrationInitial extends RegistrationState {}
+enum Status { loading, success, error }
 
-class RegistrationLoading extends RegistrationState {}
+class RegistrationState extends Equatable {
+  const RegistrationState(
+      {required this.status,
+      this.successMessage,
+      this.error,
+      this.loading = false});
+  final Status status;
+  final String? successMessage;
+  final String? error;
+  final bool loading;
 
-class RegistrationSuccess extends RegistrationState {
-  final String message;
+  RegistrationState copyWith({
+    String? successMessage,
+    String? error,
+    bool? loading,
+    Status? status,
+  }) {
+    return RegistrationState(
+        successMessage: successMessage ?? this.successMessage,
+        error: error ?? this.error,
+        loading: loading ?? this.loading,
+        status: status ?? this.status);
+  }
 
-  RegistrationSuccess(this.message);
-}
-
-class RegistrationFailure extends RegistrationState {
-  final String error;
-
-  RegistrationFailure(this.error);
+  @override
+  List<Object?> get props => [successMessage, error, status, loading];
 }

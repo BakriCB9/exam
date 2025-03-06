@@ -5,34 +5,44 @@ import 'package:exam_app/features/register/presentation/widgets/sign_field.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/di/di.dart';
+import '../cubit/register_intent.dart';
+
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
-
+  static const String signUp = 'SignUpPage';
   @override
   State<SignUpPage> createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<SignUpPage> {
+  late RegistrationCubit registrationCubit;
+  void initState() {
+    super.initState();
+    registrationCubit = getIt.get<RegistrationCubit>();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: BlocConsumer<RegistrationCubit, RegistrationState>(
+          bloc: registrationCubit,
           listener: (context, state) {
-             if (state is RegistrationSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-            } else if (state is RegistrationFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+            if (state.status == Status.success) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.successMessage ?? "Success")));
+            } else if (state.status == Status.error) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error ?? "An error occurred")));
             }
-           
           },
           builder: (context, state) {
-             final cubit = context.read<RegistrationCubit>();
-             bool isLoading = state is RegistrationLoading;
+             final cubit = registrationCubit;
             return SafeArea(
                 child: Padding(
               padding: const EdgeInsets.all(15),
               child: Form(
+                key: cubit.formKey,
+
                 child: Column(
                   children: [
                     const Row(
@@ -51,9 +61,9 @@ class _MyWidgetState extends State<SignUpPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: SignField(
-        
+
                           errorText: cubit.usernameError,
-        
+
                         controller: cubit.usernameController,
                           hint: "Enter your user name", label: "User name"),
                     ),
@@ -64,7 +74,7 @@ class _MyWidgetState extends State<SignUpPage> {
                           padding: const EdgeInsets.only(right: 10),
                           child: SignField(
                               errorText: cubit.firstNameError,
-        
+
                             controller: cubit.firstNameController,
                               hint: "Enter first name", label: "first name"),
                         )),
@@ -114,14 +124,14 @@ class _MyWidgetState extends State<SignUpPage> {
                         controller: cubit.phoneController,
                           hint: "Enter phone number", label: "phone number"),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
-                   isLoading 
-                  ? CircularProgressIndicator() 
+                   state.loading
+                  ? const CircularProgressIndicator()
                   : InkWell(
-                      onTap: () => cubit.register(),
-                      child: SignButton(),
+                      onTap: () => cubit.DoIntent(RegisterButtonClicked()),
+                      child: const SignButton(),
                     ),
                     const Padding(
                       padding: EdgeInsets.all(16),
@@ -138,10 +148,10 @@ class _MyWidgetState extends State<SignUpPage> {
                           Text(
                             "Login",
                             style: TextStyle(
-                                decorationColor: Color(0XFFb02369C),
+                                decorationColor: Color(0Xffb02369c),
                                 decorationThickness: 2,
                                 decoration: TextDecoration.underline,
-                                color: Color(0XFFb02369C),
+                                color: Color(0Xffb02369c),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16),
                           ),
