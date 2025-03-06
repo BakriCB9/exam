@@ -22,11 +22,10 @@ class LoginRepoImpl implements LoginRepo {
       if (ans.token != null) {
         await localDataSourceContract.saveUserToken(ans.token!);
       }
-      return ApiResultSuccess<LoginResponse>(ans);
+      return SuccessApiResult<LoginResponse>(ans);
     } on DioException catch (e) {
-      return ApiResultError<LoginResponse>(e.message.toString());
-    } catch (e) {
-      return ApiResultError<LoginResponse>(e.toString());
+      return ErrorApiResult<LoginResponse>(
+          Exception('${e.response?.data['message']}'));
     }
   }
 }

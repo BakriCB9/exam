@@ -21,10 +21,12 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginStateLoading());
     ApiResult<LoginResponse> result = await loginusecase(requestBody);
     switch (result) {
-      case ApiResultSuccess<LoginResponse>():
-        emit(LoginStateSuccess(result.data.message!));
-      case ApiResultError<LoginResponse>():
-        emit(LoginStateError(result.error));
+      case SuccessApiResult<LoginResponse>():
+        emit(LoginStateSuccess(result.data!.message!));
+      case ErrorApiResult<LoginResponse>():
+        emit(LoginStateError(
+          result.exception.toString().replaceFirst('Exception: ', ''),
+        ));
     }
   }
 }

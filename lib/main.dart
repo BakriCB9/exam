@@ -1,5 +1,7 @@
 import 'package:exam_app/config/appTheme.dart';
 import 'package:exam_app/core/di/di.dart';
+import 'package:exam_app/core/routes_manager/route_generator.dart';
+import 'package:exam_app/core/routes_manager/routes_name.dart';
 import 'package:exam_app/features/login/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +25,8 @@ class ExampApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: const LoginScreen(),
+          onGenerateRoute: RouteGenerator.getRoute,
+          initialRoute: Routes.loginRoute,
           theme: AppTheme.lightTheme,
         );
       },

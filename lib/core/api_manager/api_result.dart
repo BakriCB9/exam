@@ -1,11 +1,13 @@
 sealed class ApiResult<T> {}
 
-class ApiResultSuccess<T> extends ApiResult<T> {
-  T data;
-  ApiResultSuccess(this.data);
+class SuccessApiResult<T> extends ApiResult<T> {
+  final T? data;
+
+  SuccessApiResult(this.data);
 }
 
-class ApiResultError<T> extends ApiResult<T> {
-  String error;
-  ApiResultError(this.error);
+class ErrorApiResult<T> extends ApiResult<T> {
+  final Exception exception;
+
+  ErrorApiResult(this.exception);
 }
