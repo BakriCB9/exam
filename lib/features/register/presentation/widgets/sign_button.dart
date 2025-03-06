@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignButton extends StatelessWidget {
   const SignButton({super.key});
@@ -7,15 +8,15 @@ class SignButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
 
-width: 350,
-height: 55,
+width: 350.w,
+height: 55.h,
 decoration: BoxDecoration(
-borderRadius: BorderRadius.circular(30),
+borderRadius: BorderRadius.circular(30.r),
   color: const Color(0Xffb02369c
 )
 ),
 
-child: Center(child: Text("Signup",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),)),
+child: Center(child: Text("Signup",style: TextStyle(color: Colors.white,fontSize: 18.sp,fontWeight: FontWeight.bold),)),
 
     );
   }

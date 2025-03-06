@@ -4,6 +4,7 @@ import 'package:exam_app/features/register/presentation/widgets/sign_button.dart
 import 'package:exam_app/features/register/presentation/widgets/sign_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/di/di.dart';
 import '../cubit/register_intent.dart';
@@ -45,16 +46,16 @@ class _MyWidgetState extends State<SignUpPage> {
 
                 child: Column(
                   children: [
-                    const Row(
+                     Row(
                       children: [
                         Icon(
                           Icons.arrow_back_ios,
-                          size: 20,
+                          size: 20.r,
                         ),
                         Text(
                           "Sign up",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 20),
+                              fontWeight: FontWeight.w500, fontSize: 20.sp),
                         ),
                       ],
                     ),
@@ -124,8 +125,8 @@ class _MyWidgetState extends State<SignUpPage> {
                         controller: cubit.phoneController,
                           hint: "Enter phone number", label: "phone number"),
                     ),
-                    const SizedBox(
-                      height: 30,
+                     SizedBox(
+                      height: 30.h,
                     ),
                    state.loading
                   ? const CircularProgressIndicator()
@@ -133,7 +134,7 @@ class _MyWidgetState extends State<SignUpPage> {
                       onTap: () => cubit.DoIntent(RegisterButtonClicked()),
                       child: const SignButton(),
                     ),
-                    const Padding(
+                     Padding(
                       padding: EdgeInsets.all(16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -143,7 +144,7 @@ class _MyWidgetState extends State<SignUpPage> {
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 16),
+                                fontSize: 16.sp),
                           ),
                           Text(
                             "Login",
@@ -153,7 +154,7 @@ class _MyWidgetState extends State<SignUpPage> {
                                 decoration: TextDecoration.underline,
                                 color: Color(0Xffb02369c),
                                 fontWeight: FontWeight.w500,
-                                fontSize: 16),
+                                fontSize: 16.sp),
                           ),
                         ],
                       ),
