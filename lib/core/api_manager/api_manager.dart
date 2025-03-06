@@ -12,7 +12,7 @@ class ApiManager {
   }
 
   Future<Response> post(
-      {required String endpoint, required String token, var data}) async {
+      {required String endpoint, required var data, String? token}) async {
     var response = await dio.post(endpoint, data: data);
     return response;
   }

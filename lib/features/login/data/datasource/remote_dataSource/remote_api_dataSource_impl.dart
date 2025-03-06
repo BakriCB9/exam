@@ -15,8 +15,8 @@ class RemoteApiDataSoucrceImpl implements RemoteDataSourceContract {
   @override
   Future<LoginResponse> login(
       ApiRequestModel<LoginRequestModel> requestBody) async {
-    var body = await apiManager.get(
-        endpoint: AppConstants.login, requestbody: requestBody.data.toJson());
+    var body = await apiManager.post(
+        endpoint: AppConstants.login, data: requestBody.data.toJson());
 
     return LoginResponse.fromJson(body.data);
   }
