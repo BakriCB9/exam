@@ -1,14 +1,16 @@
 import 'package:exam_app/config/appTheme.dart';
 import 'package:exam_app/core/di/di.dart';
+import 'package:exam_app/core/helper_function/help_function.dart';
 import 'package:exam_app/core/routes_manager/route_generator.dart';
 import 'package:exam_app/core/routes_manager/routes_name.dart';
-import 'package:exam_app/features/login/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+String? userToken;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized;
   configureDependencies();
+  userToken = await getToken();
   await ScreenUtil.ensureScreenSize();
   runApp(const ExampApp());
 }
@@ -26,7 +28,8 @@ class ExampApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.getRoute,
-          initialRoute: Routes.loginRoute,
+          initialRoute:
+              userToken == null ? Routes.loginRoute : Routes.registerRoute,
           theme: AppTheme.lightTheme,
         );
       },

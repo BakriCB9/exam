@@ -2,10 +2,12 @@ import 'package:exam_app/config/appColor.dart';
 import 'package:exam_app/config/appString.dart';
 import 'package:exam_app/core/api_manager/api_request.dart';
 import 'package:exam_app/core/di/di.dart';
+import 'package:exam_app/core/routes_manager/routes_name.dart';
 import 'package:exam_app/core/validate/validate.dart';
 import 'package:exam_app/core/widgets/custom_text_form_field.dart';
 import 'package:exam_app/core/widgets/ui_utils.dart';
 
+import 'package:exam_app/features/login/data/model/loginModel.dart';
 import 'package:exam_app/features/login/presentation/cubit/cubit/login_cubit.dart';
 import 'package:exam_app/features/login/presentation/cubit/cubit/login_state.dart';
 import 'package:exam_app/features/login/presentation/screens/widget/custom_checkBox.dart';
@@ -13,9 +15,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/routes_manager/routes_name.dart';
-import '../../data/model/loginModel.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -51,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
               case LoginStateSuccess():
                 UiUtils.hideLoading(context);
-
 
               case LoginStateError():
                 UiUtils.hideLoading(context);
@@ -109,7 +107,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           LoginRequestModel(
                               email: loginCubit.emailController.text,
                               password: loginCubit.passwordController.text)));
-
                     },
                     child: Text(
                       AppString.login,
@@ -130,7 +127,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             decoration: TextDecoration.underline),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                           Navigator.of(context).pushReplacementNamed(Routes.registerRoute);
+                            Navigator.of(context)
+                                .pushReplacementNamed(Routes.loginRoute);
                           }),
                   ]),
                 )
