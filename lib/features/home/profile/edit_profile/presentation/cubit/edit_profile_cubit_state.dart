@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/show_data_entite.dart';
+import '../../domain/entities/profile_entity.dart';
 
-enum StatusEditProfile { loading, success, error }
+enum StatusEditProfile { loading, success, error ,init}
 
 class EditProfileState extends Equatable {
   const EditProfileState(
@@ -13,14 +13,14 @@ class EditProfileState extends Equatable {
       });
   final StatusEditProfile status;
   final String? error;
-  final ShowDataEntity? profileData; // Add this line
+  final ProfileEntity? profileData; // Add this line
 
 
   EditProfileState copyWith({
     String? successMessage,
     String? error,
     StatusEditProfile? status,
-    ShowDataEntity? profileData,
+    ProfileEntity? profileData,
 
   }) {
     return EditProfileState(

@@ -1,5 +1,5 @@
 
-import 'package:exam_app/features/home/profile/edit_profile/domain/entities/show_data_entite.dart';
+import 'package:exam_app/features/home/profile/edit_profile/domain/entities/profile_entity.dart';
 import 'package:exam_app/features/home/profile/edit_profile/domain/repositories/show_data_repo.dart';
 import 'package:injectable/injectable.dart';
 

@@ -20,8 +20,6 @@ class _MyWidgetState extends State<ProfileView> {
     super.initState();
     editProfileCubit = getIt.get<EditProfileCubit>();
     editProfileCubit.loadProfile();
-    editProfileCubit.loadProfile();
-
 
   }
   @override
@@ -32,12 +30,15 @@ class _MyWidgetState extends State<ProfileView> {
           bloc: editProfileCubit,
           builder: (context, state) {
             final cubit = editProfileCubit;
-            return SafeArea(
+            return state.status==StatusEditProfile.loading?
+            SafeArea(child: Padding(
+              padding:  EdgeInsets.only(top: 350.h),
+              child: Center(child: CircularProgressIndicator()),
+            )):
+            SafeArea(
                 child: Padding(
                   padding:  EdgeInsets.all(15.r),
                   child: Form(
-                    key: cubit.formKey,
-
                     child: Column(
                       children: [
                         Row(
@@ -59,7 +60,7 @@ class _MyWidgetState extends State<ProfileView> {
 
 
                               controller: cubit.usernameController,
-                              hint: "", label: "User name"),
+                              hint: cubit.savedUserName.toString(), label: "User name"),
                         ),
                         Row(
                           children: [
@@ -69,14 +70,14 @@ class _MyWidgetState extends State<ProfileView> {
                                   child: SignField(
 
                                       controller: cubit.firstNameController,
-                                      hint: "", label: "first name"),
+                                      hint: cubit.savedFirstName.toString(), label: "first name"),
                                 )),
                             Expanded(
                                 child: Padding(
                                   padding:  EdgeInsets.only(left: 10.w),
                                   child: SignField(
                                       controller: cubit.lastNameController,
-                                      hint: "Enter last name", label: "last name"),
+                                      hint: cubit.savedLastName.toString(), label: "last name"),
                                 )),
                           ],
                         ),
@@ -85,7 +86,7 @@ class _MyWidgetState extends State<ProfileView> {
                           child:
                           SignField(
                               controller: cubit.emailController,
-                              hint: "", label: "Email"),
+                              hint: cubit.savedEmail.toString(), label: "Email"),
                         ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 16.0, vertical:16),
@@ -142,12 +143,16 @@ class _MyWidgetState extends State<ProfileView> {
                           padding:  EdgeInsets.symmetric(vertical: 20.h),
                           child: SignField(
                               controller: cubit.phoneController,
-                              hint: "", label: "phone number"),
+                              hint: cubit.savedPhone.toString(), label: "phone number"),
                         ),
                         SizedBox(
                           height: 30.h,
                         ),
-                        const SignButton(text: "Update"),
+                        state.status==StatusEditProfile.success? InkWell(
+                            onTap: ()=>cubit.updateProfile(),
+                            child: const SignButton(text: "Update"))
+                            :InkWell(
+                            child: const SignButton(text: "Update"))
                       ],
                     ),
                   ),

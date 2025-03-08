@@ -1,13 +1,11 @@
-class ShowDataEntity {
-  final String id;
+class ProfileEntity {
   final String username;
   final String firstName;
   final String lastName;
   final String email;
   final String phone;
 
-  ShowDataEntity({
-    required this.id,
+  ProfileEntity({
     required this.username,
     required this.firstName,
     required this.lastName,
@@ -16,10 +14,9 @@ class ShowDataEntity {
   });
 
   // Factory constructor for creating an instance from JSON
-  factory ShowDataEntity.fromJson(Map<String, dynamic> json) {
+  factory ProfileEntity.fromJson(Map<String, dynamic> json) {
     final user = json['user'] as Map<String, dynamic>; // Access the nested user object
-    return ShowDataEntity(
-      id: user['_id'] ?? '',
+    return ProfileEntity(
       username: user['username'] ?? '',
       firstName: user['firstName'] ?? '',
       lastName: user['lastName'] ?? '',

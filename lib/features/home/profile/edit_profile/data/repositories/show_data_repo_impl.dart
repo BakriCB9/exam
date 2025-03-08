@@ -3,7 +3,7 @@ import 'package:exam_app/features/home/profile/edit_profile/data/remote/data_sou
 import 'package:exam_app/features/home/profile/edit_profile/domain/repositories/show_data_repo.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../domain/entities/show_data_entite.dart';
+import '../../domain/entities/profile_entity.dart';
 @Injectable(as: ShowDataRepo)
 class ShowDataRepoImpl implements ShowDataRepo
 {

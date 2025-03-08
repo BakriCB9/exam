@@ -18,8 +18,8 @@ class ApiManager {
     return response;
   }
 
-  Future<Response> put({required String token, required String endpoint, var data}) async {
-    dio.options.headers["token"] = "Bearer $token";
+  Future<Response> put({String? token, required String endpoint, var data}) async {
+    dio.options.headers["token"] = "$token";
     var response = await dio.put(endpoint, data: data);
     return response;
   }
