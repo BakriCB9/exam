@@ -13,7 +13,6 @@ import '../cubit/register_intent.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
-  static const String signUp = 'SignUpPage';
   @override
   State<SignUpPage> createState() => _MyWidgetState();
 }
@@ -133,7 +132,7 @@ class _MyWidgetState extends State<SignUpPage> {
                   ? const CircularProgressIndicator()
                   : InkWell(
                       onTap: () => cubit.DoIntent(RegisterButtonClicked()),
-                      child: const SignButton(),
+                      child: const SignButton(text:"SignUp",),
                     ),
                      Padding(
                       padding: EdgeInsets.all(16.r),

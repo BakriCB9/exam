@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignButton extends StatelessWidget {
-  const SignButton({super.key});
-
+  const SignButton({super.key,required this.text});
+final String text;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +16,7 @@ borderRadius: BorderRadius.circular(30.r),
 )
 ),
 
-child: Center(child: Text("Signup",style: TextStyle(color: Colors.white,fontSize: 18.sp,fontWeight: FontWeight.bold),)),
+child: Center(child: Text(text,style: TextStyle(color: Colors.white,fontSize: 18.sp,fontWeight: FontWeight.bold),)),
 
     );
   }

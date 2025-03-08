@@ -7,11 +7,11 @@ class LocalStroage {
       aOptions: AndroidOptions(
     encryptedSharedPreferences: true,
   ));
-  void saveToken({required String key, required String value}) {
-    storage.write(key: key, value: value);
+  void saveToken({required String key, required String value}) async{
+    await storage.write(key: key, value: value);
   }
 
-  Future<String?> getToken({required String key}) {
-    return storage.read(key: key);
+  Future<String?> getToken({required String key}) async{
+    return  await storage.read(key: key);
   }
 }

@@ -30,12 +30,14 @@ class SignField extends StatelessWidget {
             floatingLabelBehavior: FloatingLabelBehavior.always,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: errorText != null ? Colors.red : Colors.grey,
+                width: 1.8,
+                color: errorText != null ? Colors.red : Colors.black54,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: errorText != null ? Colors.red : Colors.blue,
+                width: 1.8,
+                color: errorText != null ? Colors.red : Colors.black54,
               ),
             ),
           ),

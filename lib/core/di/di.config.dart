@@ -11,6 +11,18 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/home/profile/edit_profile/data/remote/data_sources/show_data_data_source.dart'
+    as _i549;
+import '../../features/home/profile/edit_profile/data/remote/data_sources/show_data_data_source_impl.dart'
+    as _i226;
+import '../../features/home/profile/edit_profile/data/repositories/show_data_repo_impl.dart'
+    as _i761;
+import '../../features/home/profile/edit_profile/domain/repositories/show_data_repo.dart'
+    as _i224;
+import '../../features/home/profile/edit_profile/domain/use_cases/show_data_usecase.dart'
+    as _i79;
+import '../../features/home/profile/edit_profile/presentation/cubit/edit_profile_cubit.dart'
+    as _i755;
 import '../../features/login/data/datasource/local_dataSource/local_dataSource_contract.dart'
     as _i968;
 import '../../features/login/data/datasource/local_dataSource/local_dataSource_impl.dart'
@@ -53,20 +65,28 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i503.RemoteApiDataSoucrceImpl(gh<_i266.ApiManager>()));
     gh.factory<_i138.DataSource>(
         () => _i850.RegisterDataSource(gh<_i266.ApiManager>()));
+    gh.factory<_i549.ShowData>(
+        () => _i226.ShowDataImpl(gh<_i266.ApiManager>()));
     gh.factory<_i0.LoginRepo>(() => _i436.LoginRepoImpl(
           gh<_i666.RemoteDataSourceContract>(),
           gh<_i968.LocalDatasourceContract>(),
         ));
     gh.factory<_i683.UserRepo>(
         () => _i497.UserRepoImpl(gh<_i138.DataSource>()));
+    gh.factory<_i224.ShowDataRepo>(
+        () => _i761.ShowDataRepoImpl(gh<_i549.ShowData>()));
     gh.factory<_i813.Loginusecase>(
         () => _i813.Loginusecase(gh<_i0.LoginRepo>()));
     gh.factory<_i779.RegisterUser>(
         () => _i779.RegisterUser(gh<_i683.UserRepo>()));
+    gh.factory<_i79.ShowDataUseCase>(
+        () => _i79.ShowDataUseCase(gh<_i224.ShowDataRepo>()));
     gh.factory<_i39.LoginCubit>(
         () => _i39.LoginCubit(gh<_i813.Loginusecase>()));
     gh.factory<_i266.RegistrationCubit>(
         () => _i266.RegistrationCubit(gh<_i779.RegisterUser>()));
+    gh.factory<_i755.EditProfileCubit>(
+        () => _i755.EditProfileCubit(gh<_i79.ShowDataUseCase>()));
     return this;
   }
 }

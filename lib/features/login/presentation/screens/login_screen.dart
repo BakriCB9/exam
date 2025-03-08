@@ -6,6 +6,7 @@ import 'package:exam_app/core/routes_manager/routes_name.dart';
 import 'package:exam_app/core/validate/validate.dart';
 import 'package:exam_app/core/widgets/custom_text_form_field.dart';
 import 'package:exam_app/core/widgets/ui_utils.dart';
+import 'package:exam_app/features/home/profile/edit_profile/presentation/pages/profile_view.dart';
 
 import 'package:exam_app/features/login/data/model/loginModel.dart';
 import 'package:exam_app/features/login/presentation/cubit/cubit/login_cubit.dart';
@@ -47,13 +48,21 @@ class _LoginScreenState extends State<LoginScreen> {
               case LoginStateLoading():
                 UiUtils.showLoading(context);
               // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
+             break;
               case LoginStateSuccess():
+
                 UiUtils.hideLoading(context);
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => ProfileView()),
+                      (Route<dynamic> route) => false,
+                );
+                break;
+
 
               case LoginStateError():
                 UiUtils.hideLoading(context);
                 UiUtils.showToastMessage(state.message);
+                break;
 
               case LoginStateInit():
               // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>));
@@ -128,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.of(context)
-                                .pushReplacementNamed(Routes.loginRoute);
+                                .pushReplacementNamed(Routes.registerRoute);
                           }),
                   ]),
                 )

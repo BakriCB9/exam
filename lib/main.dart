@@ -4,15 +4,17 @@ import 'package:exam_app/core/helper_function/help_function.dart';
 import 'package:exam_app/core/routes_manager/route_generator.dart';
 import 'package:exam_app/core/routes_manager/routes_name.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 String? userToken;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized;
   configureDependencies();
-  userToken = await getToken();
   await ScreenUtil.ensureScreenSize();
+  userToken = await getToken();
   runApp(const ExampApp());
+
 }
 
 class ExampApp extends StatelessWidget {
@@ -29,7 +31,7 @@ class ExampApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.getRoute,
           initialRoute:
-              userToken == null ? Routes.loginRoute : Routes.registerRoute,
+              userToken == null ? Routes.loginRoute : Routes.profileRoute,
           theme: AppTheme.lightTheme,
         );
       },

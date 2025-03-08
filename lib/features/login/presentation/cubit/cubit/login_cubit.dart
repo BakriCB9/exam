@@ -1,5 +1,6 @@
 import 'package:exam_app/core/api_manager/api_request.dart';
 import 'package:exam_app/core/api_manager/api_result.dart';
+import 'package:exam_app/core/helper_function/help_function.dart';
 
 import 'package:exam_app/features/login/data/model/loginModel.dart';
 import 'package:exam_app/features/login/data/model/login_response/login_response.dart';
@@ -23,10 +24,14 @@ class LoginCubit extends Cubit<LoginState> {
     switch (result) {
       case SuccessApiResult<LoginResponse>():
         emit(LoginStateSuccess(result.data!.message!));
+        break;
       case ErrorApiResult<LoginResponse>():
         emit(LoginStateError(
           result.exception.toString().replaceFirst('Exception: ', ''),
-        ));
+        )
+        );
+        break;
+
     }
   }
 }
