@@ -23,4 +23,9 @@ class ApiManager {
     var response = await dio.put(endpoint, data: data);
     return response;
   }
+   Future<Response> patch({String? token, required String endpoint, var data}) async {
+    dio.options.headers["token"] = "$token";
+    var response = await dio.patch(endpoint, data: data);
+    return response;
+  }
 }

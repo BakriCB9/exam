@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 
 import '../../domain/entities/profile_entity.dart';
 
-enum StatusEditProfile { loading, success, error ,init}
+enum StatusEditProfile { loading, successLoadProfile, error ,init, successShowData, errorGetData, errorFormIsEmpty, SuccessUpdateProfile, erorrUpdateProfile, loadingGetData,navigateViewDone,navigateUpdateDone, pickImageFromGallery, pickImageFromCamera, errorMatchedPassword, SuccessChangePassword, errorCahngePassword, loadingCahngePassword, loadingProfile}
 
-class EditProfileState extends Equatable {
+ class EditProfileState extends Equatable {
   const EditProfileState(
       {required this.status,
       this.error,

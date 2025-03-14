@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../config/appColor.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/routes_manager/routes_name.dart';
 import '../cubit/register_intent.dart';
@@ -132,7 +133,7 @@ class _MyWidgetState extends State<SignUpPage> {
                   ? const CircularProgressIndicator()
                   : InkWell(
                       onTap: () => cubit.DoIntent(RegisterButtonClicked()),
-                      child: const SignButton(text:"SignUp",),
+                      child:  SignButton(color: AppColor.blue60,text:"SignUp",),
                     ),
                      Padding(
                       padding: EdgeInsets.all(16.r),

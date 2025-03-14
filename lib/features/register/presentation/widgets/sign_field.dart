@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignField extends StatelessWidget {
-  final String label;
+  final String? label;
   final String hint;
-  final TextEditingController controller;
-  final String? errorText; 
+  final TextEditingController? controller;
+  final String? errorText;
+final bool? enabled;
+final Widget? widget;
+final Widget? suffixWidget;
 
   const SignField({
     super.key,
-    required this.label,
+     this.label,
     required this.hint,
-    required this.controller,
+     this.controller,
     this.errorText,
+    this.enabled,
+    this.widget,
+    this.suffixWidget
+
   });
 
   @override
@@ -21,18 +28,32 @@ class SignField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-
+          
+          enabled: enabled,
           controller: controller,
           decoration: InputDecoration(
+            suffix: suffixWidget ,
+            prefixIcon:widget ,
             errorStyle: TextStyle(color: Colors.red),
             labelText: label,
             hintText: hint,
+            labelStyle: TextStyle(
+              color: Colors.black54, // Same color as hint text in enabled state
+            ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1.8,
                 color: errorText != null ? Colors.red : Colors.black54,
               ),
+            ),
+disabledBorder: OutlineInputBorder(
+  borderSide: BorderSide(
+    width: 1.8,
+    color: errorText != null ? Colors.red : Colors.black54,
+  ), ),
+            hintStyle: TextStyle(
+              color: Colors.black87, // Same color as hint text in enabled state
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
@@ -42,7 +63,7 @@ class SignField extends StatelessWidget {
             ),
           ),
         ),
-        
+
         if (errorText != null)
           Padding(
             padding: const EdgeInsets.only(left: 15,top: 5.0),

@@ -13,7 +13,7 @@ try {
 }
   on DioException catch(ex)
   {
-
+print("${ex.response?.data["message"]}");
 return ErrorApiResult(Exception(' ${ex.response?.data["message"]}'));
 
   }

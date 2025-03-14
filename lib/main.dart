@@ -31,7 +31,7 @@ class ExampApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.getRoute,
           initialRoute:
-              userToken == null ? Routes.loginRoute : Routes.profileRoute,
+              userToken == null ? Routes.loginRoute : Routes.loginRoute,
           theme: AppTheme.lightTheme,
         );
       },
