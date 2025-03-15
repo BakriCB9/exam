@@ -1,10 +1,12 @@
  import 'package:exam_app/core/routes_manager/routes_name.dart';
 import 'package:exam_app/features/home/profile/edit_profile/presentation/pages/password_view.dart';
 import 'package:exam_app/features/home/profile/edit_profile/presentation/pages/profile_view.dart';
+import 'package:exam_app/features/login/presentation/screens/forget_password/forget_passwrod_screen.dart';
 import 'package:exam_app/features/login/presentation/screens/login_screen.dart';
 import 'package:exam_app/features/register/presentation/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/home/home_view.dart';
 import '../../features/home/profile/edit_profile/presentation/pages/profile_update.dart';
 
 class RouteGenerator
@@ -25,6 +27,10 @@ static  Route<dynamic> getRoute(RouteSettings settings)
      return MaterialPageRoute(builder: (_)=> const ProfileUpdate());
       case Routes.changePasswordRoute:
      return MaterialPageRoute(builder: (_)=> const PasswordView());
+    case Routes.homeViewRoute:
+      return MaterialPageRoute(builder: (_)=> HomeView());
+    case Routes.forgetPasswordRoute:
+      return MaterialPageRoute(builder: (_)=> ForgetPasswordScreen());
     default:
       return unDefinedRoute();
 

@@ -53,7 +53,7 @@ disabledBorder: OutlineInputBorder(
     color: errorText != null ? Colors.red : Colors.black45,
   ), ),
             hintStyle: TextStyle(
-              color: Colors.black45, // Same color as hint text in enabled state
+              color: Colors.black54, // Same color as hint text in enabled state
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(

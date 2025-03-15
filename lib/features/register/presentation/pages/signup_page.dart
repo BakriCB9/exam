@@ -58,10 +58,6 @@ class _MyWidgetState extends State<SignUpPage> {
                   children: [
                      Row(
                       children: [
-                        Icon(
-                          Icons.arrow_back_ios,
-                          size: 20.r,
-                        ),
                         Text(
                           "Sign up",
                           style: TextStyle(

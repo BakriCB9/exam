@@ -5,7 +5,11 @@
    static const String loginRoute="/login";
    static const String profileViewRoute="/profileView";
    static const String profileUpdateRoute="/profileUpdate";
-      static const String changePasswordRoute="/changePassword";
+   static const String changePasswordRoute="/changePassword";
+   static const String homeViewRoute="/homeView";
+   static const String forgetPasswordRoute="/forgetPasswordView";
+
+
 
 
 

@@ -28,13 +28,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late GlobalKey<FormState> formkey;
   late LoginCubit loginCubit;
-  late EditProfileCubit editprofilecubit;
   @override
   void initState() {
     super.initState();
     formkey = GlobalKey<FormState>();
     loginCubit = getIt.get<LoginCubit>();
-    editprofilecubit=getIt.get<EditProfileCubit>();
   }
 
   @override
@@ -98,10 +96,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     Expanded(
                         child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text(
-                              AppString.forgetPasword,
-                              style: theme.bodySmall?.copyWith(
-                                  decoration: TextDecoration.underline),
+                            child: InkWell(
+                              onTap: ()=>Navigator.of(context).pushNamed(Routes.forgetPasswordRoute),
+                              child: Text(
+                                AppString.forgetPasword,
+                                style: theme.bodySmall?.copyWith(
+                                    decoration: TextDecoration.underline),
+                              ),
                             )))
                   ],
                 ),

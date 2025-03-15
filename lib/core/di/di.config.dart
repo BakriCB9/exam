@@ -53,13 +53,30 @@ import '../../features/login/data/datasource/local_dataSource/local_dataSource_c
     as _i968;
 import '../../features/login/data/datasource/local_dataSource/local_dataSource_impl.dart'
     as _i678;
+import '../../features/login/data/datasource/remote_dataSource/forget_password_remote_data_source_impl.dart'
+    as _i560;
+import '../../features/login/data/datasource/remote_dataSource/forgot_password_data_source.dart'
+    as _i733;
 import '../../features/login/data/datasource/remote_dataSource/remote_api_dataSource_impl.dart'
     as _i503;
 import '../../features/login/data/datasource/remote_dataSource/remote_datasource_impl.dart'
     as _i666;
+import '../../features/login/data/datasource/remote_dataSource/reset_code.dart'
+    as _i1059;
+import '../../features/login/data/datasource/remote_dataSource/verify_reset_code._remote_impl.dart'
+    as _i972;
 import '../../features/login/data/repo/auth_repo_imp.dart' as _i436;
+import '../../features/login/data/repo/forgot_password_repo_impl.dart' as _i520;
+import '../../features/login/data/repo/reset_code-repo_impl.dart' as _i375;
+import '../../features/login/domain/repo/forgot_password_repo.dart' as _i234;
 import '../../features/login/domain/repo/login_repo.dart' as _i0;
+import '../../features/login/domain/repo/reset_code_repo.dart' as _i1038;
+import '../../features/login/domain/usecase/forget_password_usecase.dart'
+    as _i620;
 import '../../features/login/domain/usecase/loginUseCase.dart' as _i813;
+import '../../features/login/domain/usecase/reset_code_usecase.dart' as _i900;
+import '../../features/login/presentation/cubit/cubit/forgot_password_cubit.dart'
+    as _i150;
 import '../../features/login/presentation/cubit/cubit/login_cubit.dart' as _i39;
 import '../../features/register/data/data_source/data_source.dart' as _i138;
 import '../../features/register/data/data_source/remote/remote_data_source.dart'
@@ -95,26 +112,38 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i419.UpdateDataDataSourceImpl(gh<_i266.ApiManager>()));
     gh.factory<_i666.RemoteDataSourceContract>(
         () => _i503.RemoteApiDataSoucrceImpl(gh<_i266.ApiManager>()));
+    gh.factory<_i733.ForgotPasswordDataSource>(
+        () => _i560.ForgotPasswordDataSourceImpl(gh<_i266.ApiManager>()));
     gh.factory<_i138.DataSource>(
         () => _i850.RegisterDataSource(gh<_i266.ApiManager>()));
     gh.factory<_i549.ShowData>(
         () => _i226.ShowDataImpl(gh<_i266.ApiManager>()));
     gh.factory<_i365.ChangePasswordRemote>(
         () => _i879.ChangePasswordRemoteI(gh<_i266.ApiManager>()));
+    gh.factory<_i1059.ResetCodeDataSource>(
+        () => _i972.VerifyResetCodeRemoteImpl(gh<_i266.ApiManager>()));
     gh.factory<_i0.LoginRepo>(() => _i436.LoginRepoImpl(
           gh<_i666.RemoteDataSourceContract>(),
           gh<_i968.LocalDatasourceContract>(),
         ));
+    gh.factory<_i234.ForgotPasswordRepo>(() => _i520.ForgotPasswordRepoImpl(
+        remoteDataSource: gh<_i733.ForgotPasswordDataSource>()));
     gh.factory<_i1023.ChangePasswordRepo>(
         () => _i938.ChangePasswordReposI(gh<_i365.ChangePasswordRemote>()));
+    gh.factory<_i1038.ResetCodeRepo>(
+        () => _i375.ForgotPasswordRepoImpl(gh<_i1059.ResetCodeDataSource>()));
     gh.factory<_i683.UserRepo>(
         () => _i497.UserRepoImpl(gh<_i138.DataSource>()));
+    gh.factory<_i900.ResetCodeUsecase>(
+        () => _i900.ResetCodeUsecase(repository: gh<_i1038.ResetCodeRepo>()));
     gh.factory<_i224.ShowDataRepo>(
         () => _i761.ShowDataRepoImpl(gh<_i549.ShowData>()));
     gh.factory<_i204.UpdateDataRepo>(
         () => _i456.UpdateDataRepoImpl(gh<_i174.UpdateData>()));
     gh.factory<_i813.Loginusecase>(
         () => _i813.Loginusecase(gh<_i0.LoginRepo>()));
+    gh.factory<_i620.ForgotPasswordUseCase>(() => _i620.ForgotPasswordUseCase(
+        repository: gh<_i234.ForgotPasswordRepo>()));
     gh.factory<_i779.RegisterUser>(
         () => _i779.RegisterUser(gh<_i683.UserRepo>()));
     gh.factory<_i690.UpdateDataUsecase>(
@@ -125,6 +154,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i39.LoginCubit(gh<_i813.Loginusecase>()));
     gh.factory<_i908.ChangePasswordUseCase>(
         () => _i908.ChangePasswordUseCase(gh<_i1023.ChangePasswordRepo>()));
+    gh.factory<_i150.ForgotPasswordCubit>(() => _i150.ForgotPasswordCubit(
+          gh<_i900.ResetCodeUsecase>(),
+          forgotPasswordUseCase: gh<_i620.ForgotPasswordUseCase>(),
+        ));
     gh.factory<_i755.EditProfileCubit>(() => _i755.EditProfileCubit(
           gh<_i79.ShowDataUseCase>(),
           gh<_i690.UpdateDataUsecase>(),
