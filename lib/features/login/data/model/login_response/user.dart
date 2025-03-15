@@ -22,28 +22,28 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json['_id'] as String?,
-    username: json['username'] as String?,
-    firstName: json['firstName'] as String?,
-    lastName: json['lastName'] as String?,
-    email: json['email'] as String?,
-    phone: json['phone'] as String?,
-    role: json['role'] as String?,
-    isVerified: json['isVerified'] as bool?,
-    createdAt: json['createdAt'] == null
-        ? null
-        : DateTime.parse(json['createdAt'] as String),
-  );
+        id: json['_id'] as String?,
+        username: json['username'] as String?,
+        firstName: json['firstName'] as String?,
+        lastName: json['lastName'] as String?,
+        email: json['email'] as String?,
+        phone: json['phone'] as String?,
+        role: json['role'] as String?,
+        isVerified: json['isVerified'] as bool?,
+        createdAt: json['createdAt'] == null
+            ? null
+            : DateTime.parse(json['createdAt'] as String),
+      );
 
   Map<String, dynamic> toJson() => {
-    '_id': id,
-    'username': username,
-    'firstName': firstName,
-    'lastName': lastName,
-    'email': email,
-    'phone': phone,
-    'role': role,
-    'isVerified': isVerified,
-    'createdAt': createdAt?.toIso8601String(),
-  };
+        '_id': id,
+        'username': username,
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'phone': phone,
+        'role': role,
+        'isVerified': isVerified,
+        'createdAt': createdAt?.toIso8601String(),
+      };
 }

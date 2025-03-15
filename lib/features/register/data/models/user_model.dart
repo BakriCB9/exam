@@ -1,4 +1,3 @@
-
 import 'package:exam_app/features/register/domain/entite/user_entite.dart';
 
 class UserModel extends UserEntite {

@@ -10,7 +10,7 @@ class RegisterUser {
 
   RegisterUser(this.repo);
 
-  Future< ApiResult<Map<String,dynamic>>>call(UserEntite user) {
+  Future<ApiResult<Map<String, dynamic>>> call(UserEntite user) {
     return repo.register(user);
   }
 }

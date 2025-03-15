@@ -4,6 +4,16 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
+      progressIndicatorTheme:
+          ProgressIndicatorThemeData(color: AppColor.blueBase),
+      scaffoldBackgroundColor: AppColor.white,
+      appBarTheme: AppBarTheme(
+          scrolledUnderElevation: 0,
+          color: AppColor.white,
+          titleTextStyle: TextStyle(
+              fontSize: AppFontSize.fontSize20,
+              color: AppColor.blackBase,
+              fontWeight: FontWeight.w500)),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
             color: AppColor.placeHolder, fontSize: AppFontSize.fontSize16),
@@ -49,9 +59,25 @@ class AppTheme {
             fontWeight: FontWeight.w600,
             color: AppColor.black30),
       ),
+      sliderTheme: SliderThemeData(
+          activeTrackColor: AppColor.blueBase,
+          inactiveTrackColor: AppColor.black10,
+          trackHeight: 4),
+      radioTheme:
+          RadioThemeData(fillColor: WidgetStatePropertyAll(AppColor.blueBase)),
+      cardTheme: CardTheme(
+          elevation: 3,
+          color: AppColor.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
       // selectedIconTheme: IconThemeData(color: AppColor.blueBase,)),
 
       ///button theme
+      ///
+
       elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(backgroundColor: AppColor.blueBase)));
+          style: ElevatedButton.styleFrom(
+        backgroundColor: AppColor.blueBase,
+        foregroundColor: AppColor.white,
+      )));
 }

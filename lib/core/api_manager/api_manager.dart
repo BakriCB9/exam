@@ -6,9 +6,14 @@ import 'package:injectable/injectable.dart';
 class ApiManager {
   Dio dio = Dio(BaseOptions(baseUrl: AppConstants.baseUrl));
   Future<Response> get(
-      {required String endpoint, var requestbody, String? token}) async {
+      {required String endpoint,
+      var requestbody,
+      String? token,
+      Map<String, dynamic>? queryParam}) async {
     var response = await dio.get(endpoint,
-        data: requestbody, options: Options(headers: {'token': '$token'}));
+        data: requestbody,
+        queryParameters: queryParam,
+        options: Options(headers: {'token': '$token'}));
 
     return response;
   }

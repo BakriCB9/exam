@@ -17,6 +17,7 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_bloc:
   flutter_screenutil:
+  shared_preferences:
   dio:
   get_it: ^8.0.3
   injectable: ^2.5.0
@@ -24,6 +25,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   equatable: ^2.0.7
   expandable_page_view: ^1.0.17
+  lottie:
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +45,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - asset/images/
+    - asset/jsonLottie/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

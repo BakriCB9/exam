@@ -1,4 +1,4 @@
-import 'package:exam_app/features/exam/domain/entity/subject_entity.dart/subject_entity.dart';
+import 'package:exam_app/features/exam/domain/entity/subject_entity/subject_entity.dart';
 
 class Subject {
   String? id;
@@ -24,7 +24,7 @@ class Subject {
         'createdAt': createdAt?.toIso8601String(),
       };
 
-   AllSubjectEntity toAllSubjectEntity(){
+  AllSubjectEntity toAllSubjectEntity() {
     return AllSubjectEntity(icon: this.icon, name: this.name, id: this.id);
-   }   
+  }
 }

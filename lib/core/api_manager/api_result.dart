@@ -5,9 +5,9 @@ class SuccessApiResult<T> extends ApiResult<T> {
 
   SuccessApiResult(this.data);
 }
+
 class ErrorApiResult<T> extends ApiResult<T> {
   final Exception exception;
 
   ErrorApiResult(this.exception);
-
 }

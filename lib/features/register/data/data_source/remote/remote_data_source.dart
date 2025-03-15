@@ -13,13 +13,12 @@ class RegisterDataSource extends DataSource {
 
   @override
   Future<ApiResult<Map<String, dynamic>>> register(UserModel user) async {
-    return excuteApi<Map<String,dynamic>>(() async{
+    return excuteApi<Map<String, dynamic>>(() async {
       final response = await apiManager.post(
         data: user.toJson(),
         endpoint: "/api/v1/auth/signup",
       );
       return response.data;
-    }
-    );
+    });
   }
 }

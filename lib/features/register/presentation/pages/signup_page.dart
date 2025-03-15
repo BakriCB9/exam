@@ -10,7 +10,6 @@ import '../../../../core/di/di.dart';
 import '../../../../core/routes_manager/routes_name.dart';
 import '../cubit/register_intent.dart';
 
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
   static const String signUp = 'SignUpPage';
@@ -24,6 +23,7 @@ class _MyWidgetState extends State<SignUpPage> {
     super.initState();
     registrationCubit = getIt.get<RegistrationCubit>();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,22 +32,23 @@ class _MyWidgetState extends State<SignUpPage> {
           bloc: registrationCubit,
           listener: (context, state) {
             if (state.status == Status.success) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.successMessage ?? "Success")));
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.successMessage ?? "Success")));
             } else if (state.status == Status.error) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error ?? "An error occurred")));
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error ?? "An error occurred")));
             }
           },
           builder: (context, state) {
-             final cubit = registrationCubit;
+            final cubit = registrationCubit;
             return SafeArea(
                 child: Padding(
-              padding:  EdgeInsets.all(15.r),
+              padding: EdgeInsets.all(15.r),
               child: Form(
                 key: cubit.formKey,
-
                 child: Column(
                   children: [
-                     Row(
+                    Row(
                       children: [
                         Icon(
                           Icons.arrow_back_ios,
@@ -61,81 +62,84 @@ class _MyWidgetState extends State<SignUpPage> {
                       ],
                     ),
                     Padding(
-                      padding:  EdgeInsets.symmetric(vertical: 20.h),
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
                       child: SignField(
-
                           errorText: cubit.usernameError,
-
-                        controller: cubit.usernameController,
-                          hint: "Enter your user name", label: "User name"),
+                          controller: cubit.usernameController,
+                          hint: "Enter your user name",
+                          label: "User name"),
                     ),
                     Row(
                       children: [
                         Expanded(
                             child: Padding(
-                          padding:  EdgeInsets.only(right: 10.w),
+                          padding: EdgeInsets.only(right: 10.w),
                           child: SignField(
                               errorText: cubit.firstNameError,
-
-                            controller: cubit.firstNameController,
-                              hint: "Enter first name", label: "first name"),
+                              controller: cubit.firstNameController,
+                              hint: "Enter first name",
+                              label: "first name"),
                         )),
                         Expanded(
                             child: Padding(
-                          padding:  EdgeInsets.only(left: 10.w),
+                          padding: EdgeInsets.only(left: 10.w),
                           child: SignField(
-                             errorText: cubit.lastNameError,
-                            controller: cubit.lastNameController,
-                              hint: "Enter last name", label: "last name"),
+                              errorText: cubit.lastNameError,
+                              controller: cubit.lastNameController,
+                              hint: "Enter last name",
+                              label: "last name"),
                         )),
                       ],
                     ),
                     Padding(
-                      padding:  EdgeInsets.symmetric(vertical: 20.h),
-                      child:
-                          SignField(
-                            errorText: cubit.emailError,
-                            controller: cubit.emailController,
-                            hint: "Enter your Email", label: "Email"),
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      child: SignField(
+                          errorText: cubit.emailError,
+                          controller: cubit.emailController,
+                          hint: "Enter your Email",
+                          label: "Email"),
                     ),
                     Row(
                       children: [
                         Expanded(
                             child: Padding(
-                          padding:  EdgeInsets.only(right: 10.w),
+                          padding: EdgeInsets.only(right: 10.w),
                           child: SignField(
-                          errorText: cubit.passwordError,
-                            controller: cubit.passwordController,
-                              hint: "Enter password", label: "password"),
+                              errorText: cubit.passwordError,
+                              controller: cubit.passwordController,
+                              hint: "Enter password",
+                              label: "password"),
                         )),
                         Expanded(
                             child: Padding(
-                          padding:  EdgeInsets.only(left: 10.w),
+                          padding: EdgeInsets.only(left: 10.w),
                           child: SignField(
-                            errorText: cubit.rePasswordError,
-                            controller: cubit.rePasswordController,
+                              errorText: cubit.rePasswordError,
+                              controller: cubit.rePasswordController,
                               hint: "Conirm password",
                               label: "Confirm password"),
                         )),
                       ],
                     ),
                     Padding(
-                      padding:  EdgeInsets.symmetric(vertical: 20.h),
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
                       child: SignField(
-                      errorText: cubit.phoneError,
-                        controller: cubit.phoneController,
-                          hint: "Enter phone number", label: "phone number"),
+                          errorText: cubit.phoneError,
+                          controller: cubit.phoneController,
+                          hint: "Enter phone number",
+                          label: "phone number"),
                     ),
-                     SizedBox(
+                    SizedBox(
                       height: 30.h,
                     ),
-                   state.loading
-                  ? const CircularProgressIndicator()
-                  : InkWell(
-                      onTap: () => cubit.DoIntent(RegisterButtonClicked()),
-                      child: const SignButton(),
-                    ),
-                     Padding(
+                    state.loading
+                        ? const CircularProgressIndicator()
+                        : InkWell(
+                            onTap: () =>
+                                cubit.DoIntent(RegisterButtonClicked()),
+                            child: const SignButton(),
+                          ),
+                    Padding(
                       padding: EdgeInsets.all(16.r),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +152,8 @@ class _MyWidgetState extends State<SignUpPage> {
                                 fontSize: 16.sp),
                           ),
                           InkWell(
-                            onTap: ()=>  Navigator.of(context).pushReplacementNamed(Routes.loginRoute),
+                            onTap: () => Navigator.of(context)
+                                .pushReplacementNamed(Routes.loginRoute),
                             child: Text(
                               "Login",
                               style: TextStyle(

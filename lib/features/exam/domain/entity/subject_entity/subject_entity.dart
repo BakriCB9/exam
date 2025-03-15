@@ -3,8 +3,8 @@ class AllSubjectEntity {
   String? name;
   String? icon;
   AllSubjectEntity({
-     this.icon,
-     this.name,
-     this.id,
+    this.icon,
+    this.name,
+    this.id,
   });
 }

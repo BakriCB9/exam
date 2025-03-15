@@ -6,24 +6,22 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/api_manager/api_result.dart';
 
-
 @Injectable(as: UserRepo)
 class UserRepoImpl implements UserRepo {
-    final DataSource registerDataSource;
+  final DataSource registerDataSource;
 
   UserRepoImpl(this.registerDataSource);
 
   @override
-  Future< ApiResult<Map<String,dynamic>>> register(UserEntite user) async {
-
-      return await registerDataSource.register(UserModel(
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phone: user.phone,
-        password: user.password,
-        rePassword: user.rePassword,
-      ));
-    }
+  Future<ApiResult<Map<String, dynamic>>> register(UserEntite user) async {
+    return await registerDataSource.register(UserModel(
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+      password: user.password,
+      rePassword: user.rePassword,
+    ));
   }
+}
