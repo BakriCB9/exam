@@ -7,7 +7,6 @@ Future<String?> getToken() async {
   final localStorage = getIt.get<LocalStroage>();
 
   userToken=  await localStorage.getToken(key: AppCashConstant.token);
-    print("------------ ${userToken} ----------------------");
   return userToken;
 
 }

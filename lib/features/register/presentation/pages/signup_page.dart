@@ -1,7 +1,7 @@
 import 'package:exam_app/features/register/presentation/cubit/cubit_state.dart';
 import 'package:exam_app/features/register/presentation/cubit/register_cubit.dart';
-import 'package:exam_app/features/register/presentation/widgets/sign_button.dart';
-import 'package:exam_app/features/register/presentation/widgets/sign_field.dart';
+import 'package:exam_app/core/widgets/sign_button.dart';
+import 'package:exam_app/core/widgets/sign_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../config/appColor.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/routes_manager/routes_name.dart';
-import '../cubit/register_intent.dart';
 
 
 class SignUpPage extends StatefulWidget {
@@ -39,7 +38,17 @@ class _MyWidgetState extends State<SignUpPage> {
           },
           builder: (context, state) {
              final cubit = registrationCubit;
-            return SafeArea(
+            return
+              state.status==Status.loading
+                  ? Center(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 400,),
+                        const CircularProgressIndicator(),
+                      ],
+                    ),
+                  ):
+              SafeArea(
                 child: Padding(
               padding:  EdgeInsets.all(15.r),
               child: Form(
@@ -129,10 +138,13 @@ class _MyWidgetState extends State<SignUpPage> {
                      SizedBox(
                       height: 30.h,
                     ),
-                   state.loading
-                  ? const CircularProgressIndicator()
-                  : InkWell(
-                      onTap: () => cubit.DoIntent(RegisterButtonClicked()),
+                   InkWell(
+                      onTap: (){
+                        if (registrationCubit.formKey.currentState?.validate() ?? false) {
+                          cubit.register();
+                        }
+
+                        },
                       child:  SignButton(color: AppColor.blue60,text:"SignUp",),
                     ),
                      Padding(

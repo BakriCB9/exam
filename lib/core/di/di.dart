@@ -3,8 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import 'di.config.dart';
 	
-final getIt = GetIt.instance;  
-  
+final getIt = GetIt.instance;
 @InjectableInit(  
   initializerName: 'init', // default  
   preferRelativeImports: true, // default  

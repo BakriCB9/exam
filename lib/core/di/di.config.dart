@@ -130,6 +130,7 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i690.UpdateDataUsecase>(),
           gh<_i908.ChangePasswordUseCase>(),
           gh<_i161.LogoutUseCase>(),
+          gh<_i844.LocalStroage>(),
         ));
     gh.factory<_i266.RegistrationCubit>(
         () => _i266.RegistrationCubit(gh<_i779.RegisterUser>()));

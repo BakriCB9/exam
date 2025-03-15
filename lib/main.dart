@@ -13,6 +13,7 @@ void main() async {
   configureDependencies();
   await ScreenUtil.ensureScreenSize();
   userToken = await getToken();
+  print(userToken);
   runApp(const ExampApp());
 
 }
@@ -31,7 +32,7 @@ class ExampApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.getRoute,
           initialRoute:
-              userToken == null ? Routes.loginRoute : Routes.loginRoute,
+              userToken == null ? Routes.loginRoute : Routes.profileViewRoute,
           theme: AppTheme.lightTheme,
         );
       },

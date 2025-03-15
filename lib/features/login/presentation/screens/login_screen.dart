@@ -6,6 +6,7 @@ import 'package:exam_app/core/routes_manager/routes_name.dart';
 import 'package:exam_app/core/validate/validate.dart';
 import 'package:exam_app/core/widgets/custom_text_form_field.dart';
 import 'package:exam_app/core/widgets/ui_utils.dart';
+import 'package:exam_app/features/home/profile/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:exam_app/features/home/profile/edit_profile/presentation/pages/profile_view.dart';
 
 import 'package:exam_app/features/login/data/model/loginModel.dart';
@@ -27,11 +28,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late GlobalKey<FormState> formkey;
   late LoginCubit loginCubit;
+  late EditProfileCubit editprofilecubit;
   @override
   void initState() {
     super.initState();
     formkey = GlobalKey<FormState>();
     loginCubit = getIt.get<LoginCubit>();
+    editprofilecubit=getIt.get<EditProfileCubit>();
   }
 
   @override
@@ -50,7 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
               // ScaffoldMessenger.of(context).showSnackBar(snackBar);
              break;
               case LoginStateSuccess():
-
                 UiUtils.hideLoading(context);
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => ProfileView()),

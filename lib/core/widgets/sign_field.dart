@@ -44,21 +44,21 @@ final Widget? suffixWidget;
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1.8,
-                color: errorText != null ? Colors.red : Colors.black54,
+                color: errorText != null ? Colors.red : Colors.black45,
               ),
             ),
 disabledBorder: OutlineInputBorder(
   borderSide: BorderSide(
     width: 1.8,
-    color: errorText != null ? Colors.red : Colors.black54,
+    color: errorText != null ? Colors.red : Colors.black45,
   ), ),
             hintStyle: TextStyle(
-              color: Colors.black87, // Same color as hint text in enabled state
+              color: Colors.black45, // Same color as hint text in enabled state
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1.8,
-                color: errorText != null ? Colors.red : Colors.black54,
+                color: errorText != null ? Colors.red : Colors.black45,
               ),
             ),
           ),

@@ -1,21 +1,16 @@
 import 'package:exam_app/core/routes_manager/routes_name.dart';
 import 'package:exam_app/features/home/profile/edit_profile/presentation/cubit/edit_profile_cubit_state.dart';
 import 'package:exam_app/features/home/profile/edit_profile/presentation/cubit/edit_profile_cubit.dart';
-import 'package:exam_app/features/home/profile/edit_profile/presentation/widgets/show_model_bottom_sheet.dart';
-import 'package:exam_app/features/register/presentation/widgets/sign_button.dart';
-import 'package:exam_app/features/register/presentation/widgets/sign_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../config/appColor.dart';
 import '../../../../../../core/di/di.dart';
-import '../widgets/loading_state.dart';
-import '../widgets/password_field.dart';
-import '../widgets/title widget.dart';
+import '../../../../../../core/widgets/button_click.dart';
+import '../../../../../../core/widgets/loading_state.dart';
+import '../widgets/text_fileld.dart';
+import '../../../../../../core/widgets/title widget.dart';
 import '../widgets/update_button.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
 class PasswordView extends StatefulWidget {
   const PasswordView({super.key});
   @override
@@ -52,9 +47,8 @@ class _MyWidgetState extends State<PasswordView> {
             }
           },
           builder: (context, state) {
-            final cubit = editProfileCubit;
             return   state.status == StatusEditProfile.loadingCahngePassword
-                ? buildLoadingState(): _buildProfileForm(cubit);
+                ? buildLoadingState():  _buildPasswordForm();
           },
         ),
       ),
@@ -62,83 +56,25 @@ class _MyWidgetState extends State<PasswordView> {
   }
 
 
-  // Main Profile Form
- Widget _buildProfileForm(EditProfileCubit cubit) {
-  return SafeArea(
-    child: Padding(
-      padding: EdgeInsets.all(15.r),
-      child: Form(
-        child: Column(
-          children: [
-
-         Row(
-
-           children: [
-
-             InkWell(
-                 onTap: ()=> Navigator.of(context).pushNamed(Routes.profileViewRoute),
-                 child: Icon(Icons.arrow_back_ios_new_outlined)),
-             buildTitle("Reset password"),
-           ],
-         ),
-            _buildUserInformation(cubit),
-            SizedBox(height: 40.h,),
-            ReusableButton(
-              onTap: () {
-              cubit.changePassword();
-              },
-              text: 'Update',
-              color: AppColor.black30,
-            ),
-          ],
+  Widget _buildPasswordForm() {
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.all(15.r),
+        child: Form(
+          child: Column(
+            children: [
+              Row(children: [buildButton( icon: Icons.arrow_back_ios_new_outlined, ontab: () { Navigator.of(context).pop(); }), buildTitle("Reset Password"),],),
+              buildTextField(controller: editProfileCubit.currentPasswordController, hint: "Current password", label: "Current password"),
+              buildTextField(controller: editProfileCubit.newPasswordController, hint: "New password", label: "New password"),
+              buildTextField(controller: editProfileCubit.confirmPasswordController, hint: "Confirm password", label: "Confirm password"),
+              ReusableButton(text: 'Update', color: AppColor.blue60, onTap: () { editProfileCubit.changePassword(); },),
+            ],
+          ),
         ),
-      ),
-    ),
-  );
-}
-  Widget _buildUserInformation(EditProfileCubit cubit) {
-    return Column(
-      children: [
-        _buildTextField(
-          controller: cubit.currentPasswordController,
-          hint: "Current password",
-          label: "Current password",
-        ),
-        _buildTextField(
-          controller: cubit.newPasswordController,
-          hint:  "New password",
-          label: "New password",
-        ),
-        _buildTextField(
-          controller: cubit.confirmPasswordController,
-          hint: "Confirm password",
-          label: "Confirm password",
-        ),
-
-
-
-
-      ],
-    );
-  }
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String hint,
-    required String label,
-  }) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15.h),
-      child: SignField(
-        enabled: true,
-        controller: controller,
-        hint: hint,
-        label: label,
       ),
     );
   }
-
-
-
-
-
 }
+
+
+

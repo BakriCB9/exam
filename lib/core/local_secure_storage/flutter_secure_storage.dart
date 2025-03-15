@@ -14,4 +14,8 @@ class LocalStroage {
   Future<String?> getToken({required String key}) async{
     return  await storage.read(key: key);
   }
+
+  Future<void> removeToken({required String key}) async {
+    await storage.delete(key: key);
+  }
 }

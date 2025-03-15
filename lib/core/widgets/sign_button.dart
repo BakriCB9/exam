@@ -10,7 +10,7 @@ final Color color;
     return Container(
 
 width: 350.w,
-height: 55.h,
+height: 50.h,
 decoration: BoxDecoration(
 borderRadius: BorderRadius.circular(30.r),
   color: color

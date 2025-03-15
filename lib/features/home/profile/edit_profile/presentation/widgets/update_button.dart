@@ -1,7 +1,7 @@
 import 'package:exam_app/features/home/profile/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../register/presentation/widgets/sign_button.dart';
+import '../../../../../../core/widgets/sign_button.dart';
 
 class ReusableButton extends StatelessWidget {
   final String text;
@@ -19,11 +19,14 @@ class ReusableButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: SignButton(
-        color: color,
-        text: text,
+    return Padding(
+      padding: const EdgeInsets.only(top: 30),
+      child: InkWell(
+        onTap: onTap,
+        child: SignButton(
+          color: color,
+          text: text,
+        ),
       ),
     );
   }

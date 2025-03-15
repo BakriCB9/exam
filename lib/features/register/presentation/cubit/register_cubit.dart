@@ -1,5 +1,4 @@
 import 'package:exam_app/core/api_manager/api_result.dart';
-import 'package:exam_app/features/register/presentation/cubit/register_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -28,9 +27,10 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   String? phoneError;
 
   RegistrationCubit(this.registerUser)
-      : super(RegistrationState(status: Status.loading, loading: false));
-  Future<void> _register() async {
-    if (!_validateForm()) {
+      : super(RegistrationState(status: Status.init));
+  Future<void> register() async {
+    if (!validateForm()) {
+      emit(RegistrationState(status: Status.notValidateForm, ));
       return;
     }
 
@@ -44,30 +44,32 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       rePassword: rePasswordController.text,
     );
 
-    emit(state.copyWith(status: Status.loading, loading: true));
+    emit(state.copyWith(status: Status.loading));
 
     final result = await registerUser(user);
 
     switch (result) {
       case SuccessApiResult():
         {
-          emit(state.copyWith(
+          Future.delayed(Duration(seconds: 1), () {
+            emit(state.copyWith(
               status: Status.success,
-              successMessage: "Registration successful",
-              loading: false));
+              successMessage: "Registration successful",));
+          });
         }
       case ErrorApiResult():
-        {
+        {Future.delayed(Duration(seconds: 1), () {
           emit(state.copyWith(
               status: Status.error,
               error:
                   result.exception.toString().replaceFirst('Exception: ', ''),
-              loading: false));
+          ));
+        });
         }
     }
   }
 
-  bool _validateForm() {
+  bool validateForm() {
     bool isValid = true;
 
     usernameError = null;
@@ -116,17 +118,6 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     return isValid;
   }
 
-  DoIntent(RegisterIntent registerIntent) {
-    switch (registerIntent) {
-      case RegisterButtonClicked():
-        {
-          _register();
-        }
-
-      case NavigateToLoginPageClicked():
-        {}
-    }
-  }
 
   void disposeControllers() {
     usernameController.dispose();
